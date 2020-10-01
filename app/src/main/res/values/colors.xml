@@ -6,8 +6,15 @@
     <color name="colorAccent">#EE5050</color>
     <color name="colorBorder">#a0a0a0</color>
 
+    <!--toolbar-->
+    <color name="toolbar_background_white">#FFFFFF</color>
+    <color name="toolbar_textColor_black">#2F2E32</color>
+
     <!--bottom navigation menu-->
     <color name="bottom_nav_selected">#2e2e33</color>
     <color name="bottom_nav_unselected">#d0d0d0</color>
+
+    <!-- poster -->
+    <color name="poster_background">#FFFFFF</color>
 
 </resources>

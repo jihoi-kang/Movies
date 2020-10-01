@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
@@ -28,10 +29,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    dataBinding {
-        enabled = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildFeatures {
         dataBinding true
@@ -50,6 +48,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$fragmentKtxVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$uiKtxVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"

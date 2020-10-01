@@ -19,6 +19,7 @@ buildscript {
         constraintLayoutVersion = '2.0.1'
         uiKtxVersion = '2.3.0'
         fragmentKtxVersion = '2.3.0'
+        navigationVersion = '2.3.0'
         kotlinVersion = '1.4.10'
         lifecycleVersion = '2.2.0'
         glideVersion = '4.11.0'
@@ -37,6 +38,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

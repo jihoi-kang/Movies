@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottom_nav_height">60dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="fab_filter_bottom_margin">24dp</dimen>
+
+    <dimen name="poster_image_width">100dp</dimen>
+    <dimen name="poster_image_height">160dp</dimen>
 </resources>

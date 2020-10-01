@@ -4,12 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/movieFragment">
-    <fragment
-        android:id="@+id/movieFragment"
-        android:name="com.jay.movies.ui.movie.MovieFragment"
-        android:label="MovieFragment" />
+
     <fragment
         android:id="@+id/tvFragment"
         android:name="com.jay.movies.ui.tv.TvFragment"
-        android:label="TvFragment" />
+        android:label="TvFragment"
+        tools:layout="@layout/fragment_tv" />
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.jay.movies.ui.movie.MovieFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_movie" >
+
+        <action
+            android:id="@+id/actionMovieToPosterDetail"
+            app:destination="@id/posterDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="posterId"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/posterDetailFragment"
+        android:name="com.jay.movies.ui.movie.detail.PosterDetailFragment"
+        android:label="PosterDetailFragment"
+        tools:layout="@layout/fragment_poster_detail" >
+        <argument
+            android:name="posterId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
 </navigation>

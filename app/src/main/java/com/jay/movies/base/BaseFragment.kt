@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.jay.movies.BR
 
 abstract class BaseFragment<VM: ViewModel, B : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int,
@@ -29,7 +30,7 @@ abstract class BaseFragment<VM: ViewModel, B : ViewDataBinding>(
         super.onViewCreated(view, savedInstanceState)
         _binding = bind(view)
         with(binding) {
-//            setVariable(BR.vm, viewModel)
+            setVariable(BR.vm, viewModel)
             lifecycleOwner = viewLifecycleOwner
         }
     }
