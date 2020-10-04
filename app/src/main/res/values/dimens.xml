@@ -4,6 +4,6 @@
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="fab_filter_bottom_margin">24dp</dimen>
 
-    <dimen name="poster_image_width">100dp</dimen>
-    <dimen name="poster_image_height">160dp</dimen>
+    <dimen name="movie_post_image_width">100dp</dimen>
+    <dimen name="movie_post_image_height">150dp</dimen>
 </resources>

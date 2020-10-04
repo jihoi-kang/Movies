@@ -18,28 +18,28 @@
         tools:layout="@layout/fragment_movie" >
 
         <action
-            android:id="@+id/actionMovieToPosterDetail"
-            app:destination="@id/posterDetailFragment"
+            android:id="@+id/actionMovieToMovieDetail"
+            app:destination="@id/movieDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim">
             <argument
-                android:name="posterId"
-                app:argType="string"
+                android:name="movieId"
+                app:argType="integer"
                 app:nullable="false" />
         </action>
 
     </fragment>
 
     <fragment
-        android:id="@+id/posterDetailFragment"
-        android:name="com.jay.movies.ui.movie.detail.PosterDetailFragment"
-        android:label="PosterDetailFragment"
-        tools:layout="@layout/fragment_poster_detail" >
+        android:id="@+id/movieDetailFragment"
+        android:name="com.jay.movies.ui.movie.detail.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail" >
         <argument
-            android:name="posterId"
-            app:argType="string"
+            android:name="movieId"
+            app:argType="integer"
             app:nullable="false" />
     </fragment>
 

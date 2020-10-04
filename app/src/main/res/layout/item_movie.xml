@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.ui.model.UiPosterModel" />
+            type="com.jay.movies.ui.model.UiMovieModel" />
 
         <variable
             name="viewModel"
@@ -24,21 +24,21 @@
         android:paddingTop="8dp"
         android:paddingBottom="4dp"
         android:onClick="@{() -> viewModel.onClickItem(item.id)}"
-        tools:background="@color/poster_background">
+        tools:background="@color/item_movie_background">
 
         <ImageView
-            android:id="@+id/iv_poster_post"
-            android:layout_width="@dimen/poster_image_width"
-            android:layout_height="@dimen/poster_image_height"
+            android:id="@+id/iv_movie_post"
+            android:layout_width="@dimen/movie_post_image_width"
+            android:layout_height="@dimen/movie_post_image_height"
             android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_movie_black"
+            app:moviePostImage="@{item.posterPath}"
             tools:src="@drawable/ic_movie_black" />
 
         <TextView
-            android:id="@+id/tv_poster_release_date"
+            android:id="@+id/tv_movie_release_date"
             android:text="@{item.releaseDate}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,22 +47,23 @@
             android:layout_marginStart="8dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster_post"
+            app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2020-09-04" />
 
         <TextView
-            android:id="@+id/tv_poster_title"
+            android:id="@+id/tv_movie_title"
             android:text="@{item.title}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="4dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster_post"
-            app:layout_constraintTop_toBottomOf="@id/tv_poster_release_date"
+            app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_release_date"
             tools:text="Mulan" />
 
         <LinearLayout
@@ -73,8 +74,8 @@
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_poster_post"
-            app:layout_constraintTop_toBottomOf="@id/tv_poster_title" >
+            app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
+            app:layout_constraintTop_toBottomOf="@id/tv_movie_title" >
 
             <ImageView
                 android:src="@drawable/ic_star_orange_light"
@@ -82,11 +83,11 @@
                 android:layout_height="16dp" />
 
             <TextView
-                android:id="@+id/tv_poster_vote_average"
-                android:text="@{item.voteAverage}"
+                android:id="@+id/tv_movie_vote_average"
                 android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:text="@{item.voteAverage}"
                 tools:text="7.4" />
 
         </LinearLayout>

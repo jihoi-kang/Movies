@@ -6,6 +6,4 @@ import dagger.hilt.android.components.ApplicationComponent
 
 @InstallIn(ApplicationComponent::class)
 @Module
-class AppModule {
-
-}
+class AppModule

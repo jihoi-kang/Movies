@@ -42,7 +42,7 @@
                 android:id="@+id/rv_movie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/item_poster" />
+                tools:listitem="@layout/item_movie" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

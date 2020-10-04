@@ -47,17 +47,17 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
     }
 
     private fun initObserve() {
-        movieViewModel.posterList.observe(viewLifecycleOwner) { posters ->
+        movieViewModel.posterList.observe(viewLifecycleOwner) { movies ->
             binding.fabFilter.isVisible = true
 
-            posters.filter { poster ->
+            movies.filter { movie ->
                 // todo : implement need
                 true
             }.let(movieAdapter::submitList)
         }
 
-        movieViewModel.itemEvent.eventObserve(viewLifecycleOwner) { posterId ->
-            val action = MovieFragmentDirections.actionMovieToPosterDetail(posterId)
+        movieViewModel.itemEvent.eventObserve(viewLifecycleOwner) { movieId ->
+            val action = MovieFragmentDirections.actionMovieToMovieDetail(movieId)
             findNavController().navigate(action)
         }
     }

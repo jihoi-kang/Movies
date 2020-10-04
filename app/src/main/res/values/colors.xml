@@ -15,6 +15,6 @@
     <color name="bottom_nav_unselected">#d0d0d0</color>
 
     <!-- poster -->
-    <color name="poster_background">#FFFFFF</color>
+    <color name="item_movie_background">#FFFFFF</color>
 
 </resources>
