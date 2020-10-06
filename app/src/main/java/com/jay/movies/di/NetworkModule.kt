@@ -1,5 +1,6 @@
 package com.jay.movies.di
 
+import com.jay.movies.api.Api.BASE_TMDB_API_PATH
 import com.jay.movies.api.service.DiscoverService
 import com.jay.movies.api.client.DiscoverClient
 import dagger.Module
@@ -34,7 +35,7 @@ class NetworkModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl(BASE_TMDB_API_PATH)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

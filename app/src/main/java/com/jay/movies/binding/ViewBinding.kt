@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jay.movies.R
+import com.jay.movies.api.Api.getBackdropPath
 
 @BindingAdapter(value = ["isRefreshing"])
 fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
@@ -25,7 +26,7 @@ fun TextView.bindSetText(value: Any) {
 @BindingAdapter(value = ["moviePostImage"])
 fun ImageView.bindPosterImage(posterPath: String?) {
     Glide.with(this)
-        .load("https://image.tmdb.org/t/p/w780$posterPath")
+        .load(getBackdropPath(posterPath))
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.ic_movie_black)
