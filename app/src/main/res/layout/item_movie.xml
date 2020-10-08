@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.ui.model.UiMovieModel" />
+            type="com.jay.movies.model.Movie" />
 
         <variable
             name="viewModel"
@@ -34,12 +34,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:moviePostImage="@{item.posterPath}"
+            app:moviePostImage="@{item.poster_path}"
             tools:src="@drawable/ic_movie_black" />
 
         <TextView
             android:id="@+id/tv_movie_release_date"
-            android:text="@{item.releaseDate}"
+            android:text="@{item.release_date}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="#00d0a8"
@@ -87,7 +87,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{item.voteAverage}"
+                app:text="@{item.vote_average}"
                 tools:text="7.4" />
 
         </LinearLayout>

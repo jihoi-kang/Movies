@@ -1,8 +1,7 @@
 package com.jay.movies.di
 
 import com.jay.movies.api.Api.BASE_TMDB_API_PATH
-import com.jay.movies.api.service.DiscoverService
-import com.jay.movies.api.client.DiscoverClient
+import com.jay.movies.api.DiscoverService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -16,14 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(ApplicationComponent::class)
 @Module
 class NetworkModule {
-
-    @Provides
-    @Reusable
-    fun provideDiscoverClient(
-        discoverService: DiscoverService
-    ): DiscoverClient {
-        return DiscoverClient(discoverService)
-    }
 
     @Provides
     @Reusable

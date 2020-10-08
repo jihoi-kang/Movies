@@ -1,4 +1,4 @@
-package com.jay.movies.data
+package com.jay.movies.model
 
 import android.os.Parcelable
 import androidx.room.Entity

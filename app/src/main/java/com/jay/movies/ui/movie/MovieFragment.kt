@@ -1,15 +1,17 @@
 package com.jay.movies.ui.movie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.jay.movies.BR
 import com.jay.movies.R
+import com.jay.movies.api.model.MovieSearchResult
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieBinding
 import com.jay.movies.util.eventObserve
@@ -36,30 +38,47 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
 
         initView()
         initObserve()
+
+        movieViewModel.movieResult.value?: let { movieViewModel.searchMovie(DEFAULT_SORT_BY) }
     }
 
     private fun initView() {
         movieAdapter = MovieAdapter(movieViewModel)
-        binding.rvMovie.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = movieAdapter
-        }
+        binding.rvMovie.adapter = movieAdapter
+        val layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        binding.rvMovie.layoutManager = layoutManager
+        binding.rvMovie.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = layoutManager.itemCount
+                val visibleItemCount = layoutManager.childCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                movieViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+            }
+        })
+
     }
 
     private fun initObserve() {
-        movieViewModel.posterList.observe(viewLifecycleOwner) { movies ->
+        movieViewModel.movieResult.observe(viewLifecycleOwner) { result ->
             binding.fabFilter.isVisible = true
-
-            movies.filter { movie ->
-                // todo : implement need
-                true
-            }.let(movieAdapter::submitList)
+            when(result) {
+                is MovieSearchResult.Success -> result.data.toMutableList().let(movieAdapter::submitList)
+                is MovieSearchResult.Error -> { }
+            }
         }
 
         movieViewModel.itemEvent.eventObserve(viewLifecycleOwner) { movieId ->
             val action = MovieFragmentDirections.actionMovieToMovieDetail(movieId)
             findNavController().navigate(action)
         }
+    }
+
+    companion object {
+
+        const val DEFAULT_SORT_BY = "popularity.desc"
+
     }
 
 }
