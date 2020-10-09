@@ -7,6 +7,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -38,6 +39,19 @@ class DiscoverRepository @Inject constructor(
         if (successful) {
             lastRequestedPage++
         }
+    }
+
+    fun getById(id: Int): Flow<Movie>? {
+        if(inMemoryCache.isNotEmpty()) {
+            inMemoryCache.forEach { movie ->
+                if(movie.id == id) {
+                    return flow {
+                        emit(movie)
+                    }
+                }
+            }
+        }
+        return null
     }
 
     private suspend fun requestAndSaveData(sortBy: String): Boolean {

@@ -14,7 +14,9 @@
     <color name="bottom_nav_selected">#2e2e33</color>
     <color name="bottom_nav_unselected">#d0d0d0</color>
 
-    <!-- poster -->
+    <!-- movie -->
     <color name="item_movie_background">#FFFFFF</color>
+    <color name="movie_detail_title">#2f2e32</color>
+    <color name="movie_detail_content">#9b9b9b</color>
 
 </resources>

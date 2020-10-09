@@ -2,4 +2,7 @@
     <string name="app_name">Movies</string>
     <string name="menu_movie">Movie</string>
     <string name="menu_tv">Tv</string>
+    <string name="menu_share">Share</string>
+    <string name="trailers">Trailers</string>
+    <string name="summary">Summary</string>
 </resources>
