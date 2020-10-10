@@ -3,6 +3,12 @@
     <string name="menu_movie">Movie</string>
     <string name="menu_tv">Tv</string>
     <string name="menu_share">Share</string>
+
     <string name="trailers">Trailers</string>
     <string name="summary">Summary</string>
+    <string name="submit">Submit</string>
+
+    <string name="filter_popularity">Popularity</string>
+    <string name="filter_new">New</string>
+    <string name="filter_vote_average">Vote average</string>
 </resources>

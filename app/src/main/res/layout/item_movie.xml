@@ -30,7 +30,7 @@
             android:id="@+id/iv_movie_post"
             android:layout_width="@dimen/movie_post_image_width"
             android:layout_height="@dimen/movie_post_image_height"
-            android:scaleType="fitXY"
+            android:scaleType="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

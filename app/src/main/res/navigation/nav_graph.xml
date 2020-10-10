@@ -30,6 +30,22 @@
                 app:nullable="false" />
         </action>
 
+        <action
+            android:id="@+id/actionMovieToMovieFilter"
+            app:destination="@id/movieFilterFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieFilterFragment"
+        android:name="com.jay.movies.ui.movie.filter.MovieFilterFragment"
+        android:label="MovieFilterFragment"
+        tools:layout="@layout/fragment_movie_filter" >
     </fragment>
 
     <fragment

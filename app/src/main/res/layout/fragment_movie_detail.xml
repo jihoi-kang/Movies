@@ -52,7 +52,7 @@
                 android:layout_height="match_parent" >
 
                 <ImageView
-                    app:moviePostImage="@{item.backdrop_path}"
+                    app:movieBackDropImage="@{item.backdrop_path}"
                     android:adjustViewBounds="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

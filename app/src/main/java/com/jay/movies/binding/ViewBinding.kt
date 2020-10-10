@@ -27,5 +27,15 @@ fun TextView.bindSetText(value: Any) {
 fun ImageView.bindPosterImage(posterPath: String?) {
     Glide.with(this)
         .load(getBackdropPath(posterPath))
+        .apply(
+            RequestOptions()
+                .placeholder(R.drawable.ic_error_outline_grey)
+        ).into(this)
+}
+
+@BindingAdapter(value = ["movieBackDropImage"])
+fun ImageView.bindBackDropImage(backDropPath: String?) {
+    Glide.with(this)
+        .load(getBackdropPath(backDropPath))
         .into(this)
 }

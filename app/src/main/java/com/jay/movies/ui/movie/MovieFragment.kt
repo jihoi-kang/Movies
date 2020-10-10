@@ -14,6 +14,7 @@ import com.jay.movies.R
 import com.jay.movies.api.model.MovieSearchResult
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieBinding
+import com.jay.movies.model.Filter
 import com.jay.movies.util.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,10 +37,25 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
             lifecycleOwner = viewLifecycleOwner
         }
 
+        initFilter()
         initView()
         initObserve()
 
-        movieViewModel.movieResult.value?: let { movieViewModel.searchMovie(DEFAULT_SORT_BY) }
+        movieViewModel.movieResult.value?: let {
+            movieViewModel.searchMovie(movieViewModel.selectedFilter.sortByName)
+        }
+    }
+
+    private fun initFilter() {
+        if(movieViewModel.allFilters.isEmpty()) {
+            movieViewModel.selectedFilter = Filter(getString(R.string.filter_popularity))
+
+            movieViewModel.allFilters = listOf(
+                Filter(getString(R.string.filter_popularity)),
+                Filter(getString(R.string.filter_new)),
+                Filter(getString(R.string.filter_vote_average)),
+            )
+        }
     }
 
     private fun initView() {
@@ -73,12 +89,12 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
             val action = MovieFragmentDirections.actionMovieToMovieDetail(movieId)
             findNavController().navigate(action)
         }
-    }
 
-    companion object {
-
-        const val DEFAULT_SORT_BY = "popularity.desc"
-
+        movieViewModel.fabEvent.eventObserve(viewLifecycleOwner) {
+            binding.fabFilter.isVisible = false
+            val action = MovieFragmentDirections.actionMovieToMovieFilter()
+            findNavController().navigate(action)
+        }
     }
 
 }

@@ -16,7 +16,7 @@ private const val STARTING_PAGE_INDEX = 1
 
 @ExperimentalCoroutinesApi
 class DiscoverRepository @Inject constructor(
-    private val discoverService: DiscoverService
+    private val discoverService: DiscoverService,
 ) {
 
     private val inMemoryCache = mutableListOf<Movie>()
@@ -79,7 +79,5 @@ class DiscoverRepository @Inject constructor(
         isRequestInProgress = false
         return successful
     }
-
-
 
 }

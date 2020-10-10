@@ -7,7 +7,7 @@ import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
 import com.jay.movies.data.DiscoverRepository
-import com.jay.movies.ui.movie.MovieFragment.Companion.DEFAULT_SORT_BY
+import com.jay.movies.model.Filter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -18,6 +18,9 @@ class MovieViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     private val TAG = this::class.java.simpleName
+
+    var allFilters: List<Filter> = emptyList()
+    lateinit var selectedFilter: Filter
 
     private val sortByLiveData = MutableLiveData<String>()
     val movieResult: LiveData<MovieSearchResult> = sortByLiveData.switchMap { sortBy ->
@@ -42,14 +45,16 @@ class MovieViewModel @ViewModelInject constructor(
         }
     }
 
-
     private val _itemEvent = MutableLiveData<Event<Int>>()
     val itemEvent: LiveData<Event<Int>> get() = _itemEvent
+
+    private val _fabEvent = MutableLiveData<Event<String>>()
+    val fabEvent: LiveData<Event<String>> get() = _fabEvent
 
     val isRefreshing: LiveData<Boolean> = movieResult.map { false }
 
     fun refresh() {
-        searchMovie(sortByLiveData.value ?: DEFAULT_SORT_BY)
+        searchMovie(selectedFilter.sortByName)
     }
 
     fun onClickItem(movieId: Int) {
@@ -57,7 +62,11 @@ class MovieViewModel @ViewModelInject constructor(
     }
 
     fun onClickFilter() {
-        // filter
+        _fabEvent.value = Event("")
+    }
+
+    fun onClickSubmit() {
+        refresh()
     }
 
     companion object {
