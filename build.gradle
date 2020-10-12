@@ -20,6 +20,7 @@ buildscript {
         uiKtxVersion = '2.3.0'
         fragmentKtxVersion = '2.3.0'
         navigationVersion = '2.3.0'
+        flexboxVersion = '2.0.1'
         kotlinVersion = '1.4.10'
         lifecycleVersion = '2.2.0'
         roomVersion = '2.2.5'

@@ -67,6 +67,7 @@
             tools:text="Mulan" />
 
         <LinearLayout
+            android:id="@+id/ll_star"
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -91,6 +92,21 @@
                 tools:text="7.4" />
 
         </LinearLayout>
+
+        <com.jay.movies.widget.NoTouchRecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:genres="@{item.genre_ids}"
+            app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
+            app:layout_constraintTop_toBottomOf="@id/ll_star"
+            app:movieVm="@{viewModel}"
+            tools:listitem="@layout/item_movie_genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

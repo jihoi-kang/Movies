@@ -2,12 +2,21 @@ package com.jay.movies.binding
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.jay.movies.R
 import com.jay.movies.api.Api.getBackdropPath
+import com.jay.movies.model.Genre
+import com.jay.movies.ui.movie.GenreAdapter
+import com.jay.movies.ui.movie.MovieViewModel
 
 @BindingAdapter(value = ["isRefreshing"])
 fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
@@ -38,4 +47,30 @@ fun ImageView.bindBackDropImage(backDropPath: String?) {
     Glide.with(this)
         .load(getBackdropPath(backDropPath))
         .into(this)
+}
+
+@BindingAdapter("movieVm", "genres")
+fun RecyclerView.bindHome(vm: MovieViewModel, items: List<Int>?) {
+    if (items?.isNotEmpty() == true) {
+        isVisible = true
+        FlexboxLayoutManager(context).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+        }.let {
+            this.layoutManager = it
+        }
+        val genres = mutableListOf<Genre>()
+        items.forEach { id ->
+            vm.allGenres.forEach { genre ->
+                if(genre.id == id) genres.add(genre)
+            }
+        }
+
+        this.adapter = GenreAdapter()
+        (this.adapter as GenreAdapter).run {
+            submitList(genres)
+        }
+    } else {
+        isGone = true
+    }
 }

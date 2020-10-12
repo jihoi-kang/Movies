@@ -18,5 +18,6 @@
     <color name="item_movie_background">#FFFFFF</color>
     <color name="movie_detail_title">#2f2e32</color>
     <color name="movie_detail_content">#9b9b9b</color>
+    <color name="movie_genre_text">#000</color>
 
 </resources>

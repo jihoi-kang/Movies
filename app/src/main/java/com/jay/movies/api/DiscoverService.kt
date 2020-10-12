@@ -9,12 +9,17 @@ import java.util.*
 
 interface DiscoverService {
 
-    @GET("/3/discover/movie?language=en")
+    @GET("/3/discover/movie")
     suspend fun fetchDiscoverMovie(
         @Query("sort_by") sortBy: String,
         @Query("page") page: Int,
         @Query("release_date.lte") today: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
     ): DiscoverMovieResponse
+
+    @GET("/3/genre/movie/list")
+    suspend fun fetchMovieGenre(
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
+    ): MovieGenreResponse
 
 }

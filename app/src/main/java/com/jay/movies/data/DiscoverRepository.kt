@@ -1,7 +1,9 @@
 package com.jay.movies.data
 
 import com.jay.movies.api.DiscoverService
+import com.jay.movies.api.model.GenreResult
 import com.jay.movies.api.model.MovieSearchResult
+import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -20,7 +22,9 @@ class DiscoverRepository @Inject constructor(
 ) {
 
     private val inMemoryCache = mutableListOf<Movie>()
+    private val inMemoryCacheGenres = mutableListOf<Genre>()
     private val searchResults = ConflatedBroadcastChannel<MovieSearchResult>()
+    private val genreResults = ConflatedBroadcastChannel<GenreResult>()
 
     private var lastRequestedPage = STARTING_PAGE_INDEX
     private var isRequestInProgress = false
@@ -28,14 +32,14 @@ class DiscoverRepository @Inject constructor(
     suspend fun getSearchResultStream(sortBy: String): Flow<MovieSearchResult> {
         lastRequestedPage = STARTING_PAGE_INDEX
         inMemoryCache.clear()
-        requestAndSaveData(sortBy)
+        requestMoviesAndSaveData(sortBy)
 
         return searchResults.asFlow()
     }
 
     suspend fun requestMore(query: String) {
         if (isRequestInProgress) return
-        val successful = requestAndSaveData(query)
+        val successful = requestMoviesAndSaveData(query)
         if (successful) {
             lastRequestedPage++
         }
@@ -54,7 +58,7 @@ class DiscoverRepository @Inject constructor(
         return null
     }
 
-    private suspend fun requestAndSaveData(sortBy: String): Boolean {
+    private suspend fun requestMoviesAndSaveData(sortBy: String): Boolean {
         isRequestInProgress = true
         var successful = false
 
@@ -77,6 +81,31 @@ class DiscoverRepository @Inject constructor(
         }
 
         isRequestInProgress = false
+        return successful
+    }
+
+    suspend fun getGenreResultStream(): List<Genre> {
+        inMemoryCacheGenres.clear()
+        requestGenresAndSaveData()
+
+        return inMemoryCacheGenres
+    }
+
+    private suspend fun requestGenresAndSaveData(): Boolean {
+        var successful = false
+
+        try {
+            val response = discoverService.fetchMovieGenre()
+            val genres = response.genres
+            inMemoryCacheGenres.addAll(genres)
+            genreResults.offer(GenreResult.Success(inMemoryCacheGenres))
+            successful = true
+        } catch (exception: IOException) {
+            genreResults.offer(GenreResult.Error(exception))
+        } catch (exception: HttpException) {
+            genreResults.offer(GenreResult.Error(exception))
+        }
+
         return successful
     }
 

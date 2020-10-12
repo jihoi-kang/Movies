@@ -8,6 +8,7 @@ import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
 import com.jay.movies.data.DiscoverRepository
 import com.jay.movies.model.Filter
+import com.jay.movies.model.Genre
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -22,9 +23,15 @@ class MovieViewModel @ViewModelInject constructor(
     var allFilters: List<Filter> = emptyList()
     lateinit var selectedFilter: Filter
 
+    var allGenres: List<Genre> = emptyList()
+
     private val sortByLiveData = MutableLiveData<String>()
     val movieResult: LiveData<MovieSearchResult> = sortByLiveData.switchMap { sortBy ->
         liveData {
+            if(allGenres.isEmpty()) {
+                allGenres = discoverRepository.getGenreResultStream()
+            }
+
             val movies =
                 discoverRepository.getSearchResultStream(sortBy).asLiveData(dispatchers.main())
             emitSource(movies)
