@@ -27,8 +27,8 @@ fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
 fun SwipeRefreshLayout.bindRefreshListener(onRefreshListener: SwipeRefreshLayout.OnRefreshListener) =
     setOnRefreshListener(onRefreshListener)
 
-@BindingAdapter(value = ["text"])
-fun TextView.bindSetText(value: Any) {
+@BindingAdapter(value = ["floatText"])
+fun TextView.bindSetText(value: Float) {
     text = value.toString()
 }
 
@@ -49,9 +49,9 @@ fun ImageView.bindBackDropImage(backDropPath: String?) {
         .into(this)
 }
 
-@BindingAdapter("movieVm", "genres")
-fun RecyclerView.bindHome(vm: MovieViewModel, items: List<Int>?) {
-    if (items?.isNotEmpty() == true) {
+@BindingAdapter("allGenres", "genreIds")
+fun RecyclerView.bindHome(allGenres: List<Genre>, genreIds: List<Int>?) {
+    if (genreIds?.isNotEmpty() == true) {
         isVisible = true
         FlexboxLayoutManager(context).apply {
             flexWrap = FlexWrap.WRAP
@@ -60,8 +60,8 @@ fun RecyclerView.bindHome(vm: MovieViewModel, items: List<Int>?) {
             this.layoutManager = it
         }
         val genres = mutableListOf<Genre>()
-        items.forEach { id ->
-            vm.allGenres.forEach { genre ->
+        genreIds.forEach { id ->
+            allGenres.forEach { genre ->
                 if(genre.id == id) genres.add(genre)
             }
         }

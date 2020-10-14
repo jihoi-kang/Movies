@@ -1,8 +1,7 @@
 package com.jay.movies.di
 
-import com.jay.movies.api.DiscoverService
-import com.jay.movies.data.DiscoverRepository
-import com.jay.movies.room.MovieDao
+import com.jay.movies.api.MovieService
+import com.jay.movies.data.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -15,9 +14,9 @@ class RepositoryModule {
 
     @Provides
     @Reusable
-    fun provideDiscoverRepository(
-        discoverService: DiscoverService,
-    ): DiscoverRepository {
-        return DiscoverRepository(discoverService)
+    fun provideMovieRepository(
+        movieService: MovieService,
+    ): MovieRepository {
+        return MovieRepository(movieService)
     }
 }

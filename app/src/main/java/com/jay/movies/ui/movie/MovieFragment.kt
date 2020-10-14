@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.jay.movies.BR
 import com.jay.movies.R
-import com.jay.movies.api.model.MovieSearchResult
+import com.jay.movies.api.model.MovieResult
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieBinding
 import com.jay.movies.model.Filter
@@ -80,8 +80,8 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
         movieViewModel.movieResult.observe(viewLifecycleOwner) { result ->
             binding.fabFilter.isVisible = true
             when(result) {
-                is MovieSearchResult.Success -> result.data.toMutableList().let(movieAdapter::submitList)
-                is MovieSearchResult.Error -> { }
+                is MovieResult.Success -> result.data.toMutableList().let(movieAdapter::submitList)
+                is MovieResult.Error -> { }
             }
         }
 

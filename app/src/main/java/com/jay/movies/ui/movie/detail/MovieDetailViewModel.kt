@@ -4,20 +4,20 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
-import com.jay.movies.data.DiscoverRepository
+import com.jay.movies.data.MovieRepository
 import com.jay.movies.model.Movie
 import kotlinx.coroutines.flow.flowOn
 
 class MovieDetailViewModel @ViewModelInject constructor(
     dispatcherProvider: DispatcherProvider,
-    discoverRepository: DiscoverRepository
+    movieRepository: MovieRepository
 ) : BaseViewModel() {
 
     private val _id: MutableLiveData<Int> = MutableLiveData()
 
     val movieContents: LiveData<Movie> = _id.switchMap { id ->
         liveData {
-            val movie = discoverRepository.getById(id)
+            val movie = movieRepository.getById(id)
 
             emitSource(movie!!.flowOn(dispatcherProvider.default()).asLiveData())
         }

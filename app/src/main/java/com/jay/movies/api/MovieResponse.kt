@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 
-data class DiscoverMovieResponse(
+data class MovieResponse(
     @SerializedName("results") val results: List<Movie> = emptyList(),
     @SerializedName("total_pages") val totalPages: Int = 0
 )

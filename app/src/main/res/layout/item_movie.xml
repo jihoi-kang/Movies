@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:moviePostImage="@{item.poster_path}"
-            tools:src="@drawable/ic_movie_black" />
+            tools:src="@drawable/ic_error_outline_grey" />
 
         <TextView
             android:id="@+id/tv_movie_release_date"
@@ -88,7 +88,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:text="@{item.vote_average}"
+                app:floatText="@{item.vote_average}"
                 tools:text="7.4" />
 
         </LinearLayout>
@@ -99,13 +99,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:genres="@{item.genre_ids}"
+            app:genreIds="@{item.genre_ids}"
+            app:allGenres="@{viewModel.allGenres}"
             app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
             app:layout_constraintTop_toBottomOf="@id/ll_star"
-            app:movieVm="@{viewModel}"
             tools:listitem="@layout/item_movie_genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ data class Movie(
     var page: Int,
     val id: Int,
     val poster_path: String? = "",
-    val adult: Boolean,
+    val adult: Boolean = false,
     val overview: String = "",
     val release_date: String? = "",
     val genre_ids: List<Int> = emptyList(),
@@ -20,6 +20,6 @@ data class Movie(
     val backdrop_path: String? = "",
     val popularity: Float = 0f,
     val vote_count: Int = 0,
-    val video: Boolean,
+    val video: Boolean = false,
     val vote_average: Float = 0f
 ) : Parcelable

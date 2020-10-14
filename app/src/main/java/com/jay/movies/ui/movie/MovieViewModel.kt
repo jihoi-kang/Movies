@@ -2,11 +2,11 @@ package com.jay.movies.ui.movie
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.jay.movies.api.model.MovieSearchResult
+import com.jay.movies.api.model.MovieResult
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
-import com.jay.movies.data.DiscoverRepository
+import com.jay.movies.data.MovieRepository
 import com.jay.movies.model.Filter
 import com.jay.movies.model.Genre
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class MovieViewModel @ViewModelInject constructor(
     private val dispatchers: DispatcherProvider,
-    private val discoverRepository: DiscoverRepository
+    private val movieRepository: MovieRepository
 ) : BaseViewModel() {
 
     private val TAG = this::class.java.simpleName
@@ -26,14 +26,14 @@ class MovieViewModel @ViewModelInject constructor(
     var allGenres: List<Genre> = emptyList()
 
     private val sortByLiveData = MutableLiveData<String>()
-    val movieResult: LiveData<MovieSearchResult> = sortByLiveData.switchMap { sortBy ->
+    val movieResult: LiveData<MovieResult> = sortByLiveData.switchMap { sortBy ->
         liveData {
             if(allGenres.isEmpty()) {
-                allGenres = discoverRepository.getGenreResultStream()
+                allGenres = movieRepository.fetchGenreResultStream()
             }
 
             val movies =
-                discoverRepository.getSearchResultStream(sortBy).asLiveData(dispatchers.main())
+                movieRepository.fetchMovieResultStream(sortBy).asLiveData(dispatchers.main())
             emitSource(movies)
         }
     }
@@ -46,7 +46,7 @@ class MovieViewModel @ViewModelInject constructor(
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             sortByLiveData.value?.let { immutableSortBy ->
                 viewModelScope.launch {
-                    discoverRepository.requestMore(immutableSortBy)
+                    movieRepository.fetchMovieMore(immutableSortBy)
                 }
             }
         }

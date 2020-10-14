@@ -76,7 +76,7 @@
                         tools:text="Mulan"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        app:text="@{item.release_date}"
+                        android:text="@{item.release_date}"
                         android:textSize="14sp"
                         android:textColor="@color/movie_detail_content"
                         android:gravity="center"

@@ -1,7 +1,7 @@
 package com.jay.movies.di
 
 import com.jay.movies.api.Api.BASE_TMDB_API_PATH
-import com.jay.movies.api.DiscoverService
+import com.jay.movies.api.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -18,7 +18,7 @@ class NetworkModule {
 
     @Provides
     @Reusable
-    fun provideDiscoverService(): DiscoverService {
+    fun provideMovieService(): MovieService {
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
         val client = OkHttpClient.Builder()
@@ -30,6 +30,6 @@ class NetworkModule {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(DiscoverService::class.java)
+            .create(MovieService::class.java)
     }
 }
