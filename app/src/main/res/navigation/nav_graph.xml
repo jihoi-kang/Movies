@@ -6,10 +6,10 @@
     app:startDestination="@id/movieFragment">
 
     <fragment
-        android:id="@+id/tvFragment"
-        android:name="com.jay.movies.ui.tv.TvFragment"
-        android:label="TvFragment"
-        tools:layout="@layout/fragment_tv" />
+        android:id="@+id/settingFragment"
+        android:name="com.jay.movies.ui.setting.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting" />
 
     <fragment
         android:id="@+id/movieFragment"

@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,13 +13,13 @@
 
     <style name="ToolbarTitleText">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/toolbar_textColor_black</item>
+        <item name="android:textColor">@color/toolbar_textColor</item>
     </style>
 
     <style name="Widget.Movies.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/toolbar_height</item>
-        <item name="android:background">@color/toolbar_background_white</item>
+        <item name="android:background">@color/toolbar_background</item>
         <item name="titleTextAppearance">@style/ToolbarTitleText</item>
         <item name="contentInsetStart">24dp</item>
     </style>

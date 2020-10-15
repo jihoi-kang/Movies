@@ -5,7 +5,7 @@
     android:icon="@drawable/ic_movie_white"
     android:title="@string/menu_movie" />
   <item
-    android:id="@+id/tvFragment"
-    android:icon="@drawable/ic_tv_white"
-    android:title="@string/menu_tv" />
+    android:id="@+id/settingFragment"
+    android:icon="@drawable/ic_settings_white"
+    android:title="@string/menu_setting" />
 </menu>

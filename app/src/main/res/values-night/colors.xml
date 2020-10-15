@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#C7C7C7</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorPrimaryDark">#121212</color>
     <color name="colorAccent">#EE5050</color>
     <color name="colorBorder">#a0a0a0</color>
 
     <!--toolbar-->
-    <color name="toolbar_background">#FFFFFF</color>
+    <color name="toolbar_background">#333</color>
     <color name="toolbar_textColor">#2F2E32</color>
 
     <!--bottom navigation menu-->
@@ -15,7 +15,7 @@
     <color name="bottom_nav_unselected">#d0d0d0</color>
 
     <!-- movie -->
-    <color name="item_movie_background">#FFFFFF</color>
+    <color name="item_movie_background">#121212</color>
     <color name="movie_detail_title">#2f2e32</color>
     <color name="movie_detail_content">#9b9b9b</color>
     <color name="movie_genre_text">#2e2e33</color>
