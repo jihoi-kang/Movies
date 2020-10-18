@@ -42,7 +42,7 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
         initObserve()
 
         movieViewModel.movieResult.value?: let {
-            movieViewModel.searchMovie(movieViewModel.selectedFilter.sortByName)
+            movieViewModel.fetchMovies(movieViewModel.selectedFilter.sortByName)
         }
     }
 

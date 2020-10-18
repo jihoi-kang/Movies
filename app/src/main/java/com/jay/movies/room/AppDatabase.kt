@@ -3,11 +3,12 @@ package com.jay.movies.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import com.jay.movies.room.converter.IntegerListConverter
 
 @Database(
-    entities = [Movie::class],
+    entities = [Movie::class, Genre::class],
     version = 1,
     exportSchema = false
 )
@@ -17,5 +18,6 @@ import com.jay.movies.room.converter.IntegerListConverter
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
+    abstract fun genreDao(): GenreDao
 
 }

@@ -3,6 +3,7 @@ package com.jay.movies.di
 import android.content.Context
 import androidx.room.Room
 import com.jay.movies.room.AppDatabase
+import com.jay.movies.room.GenreDao
 import com.jay.movies.room.MovieDao
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,12 @@ class RoomModule {
     @Reusable
     fun provideMovieDao(
         appDatabase: AppDatabase
-    ) : MovieDao {
-        return appDatabase.movieDao()
-    }
+    ) : MovieDao = appDatabase.movieDao()
+
+    @Provides
+    @Reusable
+    fun provideGenreDao(
+        appDatabase: AppDatabase
+    ) : GenreDao = appDatabase.genreDao()
+
 }

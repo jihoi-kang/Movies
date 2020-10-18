@@ -29,16 +29,16 @@ class MovieViewModel @ViewModelInject constructor(
     val movieResult: LiveData<MovieResult> = sortByLiveData.switchMap { sortBy ->
         liveData {
             if(allGenres.isEmpty()) {
-                allGenres = movieRepository.fetchGenreResultStream()
+                allGenres = movieRepository.fetchGenre()
             }
 
-            val movies =
+            val movieResultStream =
                 movieRepository.fetchMovieResultStream(sortBy).asLiveData(dispatchers.main())
-            emitSource(movies)
+            emitSource(movieResultStream)
         }
     }
 
-    fun searchMovie(sortBy: String) {
+    fun fetchMovies(sortBy: String) {
         sortByLiveData.postValue(sortBy)
     }
 
@@ -46,7 +46,7 @@ class MovieViewModel @ViewModelInject constructor(
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             sortByLiveData.value?.let { immutableSortBy ->
                 viewModelScope.launch {
-                    movieRepository.fetchMovieMore(immutableSortBy)
+                    movieRepository.fetchMoviesMore(immutableSortBy)
                 }
             }
         }
@@ -61,7 +61,7 @@ class MovieViewModel @ViewModelInject constructor(
     val isRefreshing: LiveData<Boolean> = movieResult.map { false }
 
     fun refresh() {
-        searchMovie(selectedFilter.sortByName)
+        fetchMovies(selectedFilter.sortByName)
     }
 
     fun onClickItem(movieId: Int) {

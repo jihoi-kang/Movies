@@ -20,7 +20,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.Movies.Toolbar"
+            style="@style/Widget.Toolbar"
             app:layout_constraintBottom_toTopOf="@+id/srl_refresh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

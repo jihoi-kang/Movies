@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="vm"
+            type="com.jay.movies.ui.setting.SettingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="@string/menu_setting"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.Toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/menu_setting" />
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ImageView
+                android:id="@+id/iv_theme_icon"
+                android:src="@drawable/ic_theme_black"
+                android:padding="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_theme_title"
+                android:text="@string/theme"
+                android:textColor="@color/theme_title"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_theme_icon" />
+
+            <TextView
+                android:id="@+id/tv_theme"
+                android:text="The theme change when click me!"
+                android:textColor="@color/theme_content"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_theme_title"
+                app:layout_constraintStart_toEndOf="@id/iv_theme_icon"
+                tools:text="@string/theme_light" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

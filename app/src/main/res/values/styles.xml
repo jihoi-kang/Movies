@@ -16,7 +16,7 @@
         <item name="android:textColor">@color/toolbar_textColor</item>
     </style>
 
-    <style name="Widget.Movies.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    <style name="Widget.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/toolbar_height</item>
         <item name="android:background">@color/toolbar_background</item>

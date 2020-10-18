@@ -18,4 +18,7 @@ interface MovieDao {
     @Query("SELECT * FROM Movie WHERE page = :page_")
     fun getMovieList(page_: Int): List<Movie>
 
+    @Query("DELETE FROM Movie")
+    fun clearMovieList()
+
 }

@@ -1,10 +1,11 @@
 package com.jay.movies.data
 
 import com.jay.movies.api.MovieService
-import com.jay.movies.api.model.GenreResult
 import com.jay.movies.api.model.MovieResult
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
+import com.jay.movies.room.GenreDao
+import com.jay.movies.room.MovieDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
@@ -18,13 +19,13 @@ private const val STARTING_PAGE_INDEX = 1
 
 @ExperimentalCoroutinesApi
 class MovieRepository @Inject constructor(
-    private val movieService: MovieService
+    private val movieService: MovieService,
+    private val movieDao: MovieDao,
+    private val genreDao: GenreDao,
 ) {
 
     private val inMemoryCacheMovies = mutableListOf<Movie>()
-    private val inMemoryCacheGenres = mutableListOf<Genre>()
     private val movieResults = ConflatedBroadcastChannel<MovieResult>()
-    private val genreResults = ConflatedBroadcastChannel<GenreResult>()
 
     private var lastRequestedPage = STARTING_PAGE_INDEX
     private var isRequestInProgress = false
@@ -32,77 +33,68 @@ class MovieRepository @Inject constructor(
     suspend fun fetchMovieResultStream(sortBy: String): Flow<MovieResult> {
         lastRequestedPage = STARTING_PAGE_INDEX
         inMemoryCacheMovies.clear()
+        movieDao.clearMovieList()
         fetchMoviesAndCache(sortBy)
 
         return movieResults.asFlow()
     }
 
-    suspend fun fetchMovieMore(query: String) {
+    suspend fun fetchMoviesMore(query: String) {
         if (isRequestInProgress) return
+
         val successful = fetchMoviesAndCache(query)
-        if (successful) {
-            lastRequestedPage++
-        }
+        if (successful) lastRequestedPage++
     }
 
-    fun getById(id: Int): Flow<Movie>? {
-        if(inMemoryCacheMovies.isNotEmpty()) {
-            inMemoryCacheMovies.forEach { movie ->
-                if(movie.id == id) return flow { emit(movie) }
-            }
-        }
-        return null
-    }
+    fun getById(id: Int): Flow<Movie> = flow { emit(movieDao.getMovie(id)) }
 
     private suspend fun fetchMoviesAndCache(sortBy: String): Boolean {
         isRequestInProgress = true
         var successful = false
+        var movies = movieDao.getMovieList(lastRequestedPage)
 
-        try {
-            val response = movieService.fetchMovies(
-                sortBy = sortBy, page = lastRequestedPage
-            )
-            val movies = response.results
-            movies.forEach { movie ->
-                if(!inMemoryCacheMovies.contains(movie)) {
-                    inMemoryCacheMovies.add(movie)
-                }
+        if (movies.isEmpty()) {
+            try {
+                val response = movieService.fetchMovies(
+                    sortBy = sortBy, page = lastRequestedPage
+                )
+                movies = response.results
+                movies.forEach { it.page = lastRequestedPage }
+                movieDao.insertMovieList(movies)
+                successful = true
+            } catch (exception: IOException) {
+                movieResults.offer(MovieResult.Error(exception))
+            } catch (exception: HttpException) {
+                movieResults.offer(MovieResult.Error(exception))
             }
-            movieResults.offer(MovieResult.Success(inMemoryCacheMovies))
+        } else {
             successful = true
-        } catch (exception: IOException) {
-            movieResults.offer(MovieResult.Error(exception))
-        } catch (exception: HttpException) {
-            movieResults.offer(MovieResult.Error(exception))
         }
+
+        inMemoryCacheMovies.addAll(movies.filter {
+            !inMemoryCacheMovies.contains(it)
+        })
+        movieResults.offer(MovieResult.Success(inMemoryCacheMovies))
 
         isRequestInProgress = false
         return successful
     }
 
-    suspend fun fetchGenreResultStream(): List<Genre> {
-        inMemoryCacheGenres.clear()
-        fetchGenresAndCache()
-
-        return inMemoryCacheGenres
-    }
-
-    private suspend fun fetchGenresAndCache(): Boolean {
-        var successful = false
-
-        try {
-            val response = movieService.fetchMovieGenres()
-            val genres = response.genres
-            inMemoryCacheGenres.addAll(genres)
-            genreResults.offer(GenreResult.Success(inMemoryCacheGenres))
-            successful = true
-        } catch (exception: IOException) {
-            genreResults.offer(GenreResult.Error(exception))
-        } catch (exception: HttpException) {
-            genreResults.offer(GenreResult.Error(exception))
+    suspend fun fetchGenre(): List<Genre> {
+        var genres = genreDao.getGenreList()
+        if (genres.isEmpty()) {
+            try {
+                val response = movieService.fetchMovieGenres()
+                genres = response.genres
+                genreDao.insertGenreList(genres)
+            } catch (exception: IOException) {
+                exception.printStackTrace()
+            } catch (exception: HttpException) {
+                exception.printStackTrace()
+            }
         }
 
-        return successful
+        return genres
     }
 
 }

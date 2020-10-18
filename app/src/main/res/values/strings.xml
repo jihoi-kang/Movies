@@ -11,4 +11,8 @@
     <string name="filter_popularity">Popularity</string>
     <string name="filter_new">New</string>
     <string name="filter_vote_average">Vote average</string>
+
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light Theme</string>
+    <string name="theme_dark">Dark Theme</string>
 </resources>

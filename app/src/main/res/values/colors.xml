@@ -20,4 +20,8 @@
     <color name="movie_detail_content">#9b9b9b</color>
     <color name="movie_genre_text">#2e2e33</color>
 
+    <!-- theme -->
+    <color name="theme_title">#2f2e32</color>
+    <color name="theme_content">#9b9b9b</color>
+
 </resources>

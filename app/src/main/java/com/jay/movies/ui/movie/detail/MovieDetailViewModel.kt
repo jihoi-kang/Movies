@@ -15,11 +15,11 @@ class MovieDetailViewModel @ViewModelInject constructor(
 
     private val _id: MutableLiveData<Int> = MutableLiveData()
 
-    val movieContents: LiveData<Movie> = _id.switchMap { id ->
+    val movieContents: LiveData<Movie> = _id.switchMap { movieId ->
         liveData {
-            val movie = movieRepository.getById(id)
+            val movie = movieRepository.getById(movieId)
 
-            emitSource(movie!!.flowOn(dispatcherProvider.default()).asLiveData())
+            emitSource(movie.flowOn(dispatcherProvider.default()).asLiveData())
         }
     }
 
