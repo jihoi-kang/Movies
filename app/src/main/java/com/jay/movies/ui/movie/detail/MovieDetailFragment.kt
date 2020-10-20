@@ -1,5 +1,6 @@
 package com.jay.movies.ui.movie.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -8,6 +9,7 @@ import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieDetailBinding
+import com.jay.movies.util.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +47,14 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
     private fun initObserve() {
         viewModel.movieContents.observe(viewLifecycleOwner) {
             binding.setVariable(BR.item, it)
+        }
+
+        viewModel.shareEvent.eventObserve(viewLifecycleOwner) {
+            startActivity(Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, it)
+                type = "text/plain"
+            })
         }
     }
 
