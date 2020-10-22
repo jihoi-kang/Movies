@@ -103,6 +103,15 @@
                         android:layout_height="wrap_content"
                         tools:text="@string/trailers" />
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_video"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_video" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:text="@string/summary"
                         android:textSize="18sp"

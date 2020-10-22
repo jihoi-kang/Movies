@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.jay.movies.BR
 import com.jay.movies.R
-import com.jay.movies.api.model.MovieResult
+import com.jay.movies.api.MovieResult
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieBinding
 import com.jay.movies.model.Filter

@@ -24,4 +24,7 @@
     <color name="theme_title">#2f2e32</color>
     <color name="theme_content">#9b9b9b</color>
 
+    <!-- video -->
+    <color name="item_video_title">#FFFFFF</color>
+
 </resources>

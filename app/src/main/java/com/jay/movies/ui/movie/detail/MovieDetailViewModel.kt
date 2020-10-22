@@ -7,6 +7,7 @@ import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
 import com.jay.movies.data.MovieRepository
 import com.jay.movies.model.Movie
+import com.jay.movies.model.Video
 import kotlinx.coroutines.flow.flowOn
 import java.lang.StringBuilder
 
@@ -42,6 +43,13 @@ class MovieDetailViewModel @ViewModelInject constructor(
             }
             _shareEvent.value = Event(movieRecommendation.toString())
         }
+    }
+
+    private val _itemEvent = MutableLiveData<Event<String>>()
+    val itemEvent: LiveData<Event<String>> get() = _itemEvent
+
+    fun onClickItem(videoKey: String) {
+        _itemEvent.value = Event(videoKey)
     }
 
 }

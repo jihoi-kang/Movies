@@ -1,4 +1,4 @@
-package com.jay.movies.api.model
+package com.jay.movies.api
 
 import com.jay.movies.model.Movie
 import java.lang.Exception

@@ -1,9 +1,10 @@
 package com.jay.movies.data
 
 import com.jay.movies.api.MovieService
-import com.jay.movies.api.model.MovieResult
+import com.jay.movies.api.MovieResult
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
+import com.jay.movies.model.Video
 import com.jay.movies.room.GenreDao
 import com.jay.movies.room.MovieDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,7 +47,23 @@ class MovieRepository @Inject constructor(
         if (successful) lastRequestedPage++
     }
 
-    fun getById(id: Int): Flow<Movie> = flow { emit(movieDao.getMovie(id)) }
+    fun getById(id: Int): Flow<Movie> = flow {
+        val movie = movieDao.getMovie(id)
+        var videos = movie.videos ?: emptyList()
+        if(videos.isNullOrEmpty()) {
+            try {
+                val response = movieService.fetchMovieVideos(id)
+                videos = response.results
+                movie.videos = videos
+                movieDao.updateMovie(movie)
+            } catch (exception: IOException) {
+                exception.printStackTrace()
+            } catch (exception: HttpException) {
+                exception.printStackTrace()
+            }
+        }
+        emit(movie)
+    }
 
     private suspend fun fetchMoviesAndCache(sortBy: String): Boolean {
         isRequestInProgress = true
@@ -80,7 +97,7 @@ class MovieRepository @Inject constructor(
         return successful
     }
 
-    suspend fun fetchGenre(): List<Genre> {
+    suspend fun fetchGenres(): List<Genre> {
         var genres = genreDao.getGenreList()
         if (genres.isEmpty()) {
             try {

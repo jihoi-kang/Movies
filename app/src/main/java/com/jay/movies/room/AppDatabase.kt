@@ -6,14 +6,18 @@ import androidx.room.TypeConverters
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import com.jay.movies.room.converter.IntegerListConverter
+import com.jay.movies.room.converter.VideoListConverter
 
 @Database(
     entities = [Movie::class, Genre::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(
-    value = [IntegerListConverter::class]
+    value = [
+        IntegerListConverter::class,
+        VideoListConverter::class,
+    ]
 )
 abstract class AppDatabase : RoomDatabase() {
 

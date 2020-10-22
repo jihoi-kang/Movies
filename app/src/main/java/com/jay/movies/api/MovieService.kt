@@ -2,6 +2,7 @@ package com.jay.movies.api
 
 import com.jay.movies.BuildConfig
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,5 +21,11 @@ interface MovieService {
     suspend fun fetchMovieGenres(
         @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY
     ): MovieGenreResponse
+
+    @GET("/3/movie/{movie_id}/videos")
+    suspend fun fetchMovieVideos(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String = BuildConfig.TMDB_API_KEY,
+    ): MovieVideoResponse
 
 }

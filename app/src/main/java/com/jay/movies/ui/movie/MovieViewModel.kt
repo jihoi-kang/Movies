@@ -2,7 +2,7 @@ package com.jay.movies.ui.movie
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.jay.movies.api.model.MovieResult
+import com.jay.movies.api.MovieResult
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
@@ -29,7 +29,7 @@ class MovieViewModel @ViewModelInject constructor(
     val movieResult: LiveData<MovieResult> = sortByLiveData.switchMap { sortBy ->
         liveData {
             if(allGenres.isEmpty()) {
-                allGenres = movieRepository.fetchGenre()
+                allGenres = movieRepository.fetchGenres()
             }
 
             val movieResultStream =
