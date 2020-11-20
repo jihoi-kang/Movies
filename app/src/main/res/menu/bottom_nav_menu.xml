@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-  <item
-    android:id="@+id/movieFragment"
-    android:icon="@drawable/ic_movie_white"
-    android:title="@string/menu_movie" />
-  <item
-    android:id="@+id/settingFragment"
-    android:icon="@drawable/ic_settings_white"
-    android:title="@string/menu_setting" />
+    <item
+        android:id="@+id/movieFragment"
+        android:icon="@drawable/ic_movie_white"
+        android:title="@string/menu_movie" />
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@drawable/ic_settings_white"
+        android:title="@string/menu_setting" />
 </menu>

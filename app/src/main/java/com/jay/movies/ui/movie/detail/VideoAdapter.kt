@@ -6,7 +6,7 @@ import com.jay.movies.common.DataBindingAdapter
 import com.jay.movies.model.Video
 
 class VideoAdapter(
-    viewModel: MovieDetailViewModel
+    viewModel: MovieDetailViewModel,
 ) : DataBindingAdapter<Video>(
     DiffCallback(), viewModel
 ) {
@@ -14,6 +14,7 @@ class VideoAdapter(
     class DiffCallback : DiffUtil.ItemCallback<Video>() {
         override fun areItemsTheSame(oldItem: Video, newItem: Video): Boolean =
             oldItem.id == newItem.id
+
         override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean =
             oldItem == newItem
     }

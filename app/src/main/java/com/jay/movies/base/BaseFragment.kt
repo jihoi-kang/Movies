@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jay.movies.BR
 
-abstract class BaseFragment<VM: ViewModel, B : ViewDataBinding>(
+abstract class BaseFragment<VM : ViewModel, B : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int,
-    private val viewModelClass: Class<VM>
+    private val viewModelClass: Class<VM>,
 ) : Fragment(layoutResId) {
 
     protected val viewModel: VM by lazy {
@@ -23,7 +23,7 @@ abstract class BaseFragment<VM: ViewModel, B : ViewDataBinding>(
 
     protected val binding: B get() = _binding
 
-    private fun<T : ViewDataBinding> bind(view: View): T =
+    private fun <T : ViewDataBinding> bind(view: View): T =
         DataBindingUtil.bind(view)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

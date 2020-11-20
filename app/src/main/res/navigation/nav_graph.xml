@@ -15,7 +15,7 @@
         android:id="@+id/movieFragment"
         android:name="com.jay.movies.ui.movie.MovieFragment"
         android:label="MovieFragment"
-        tools:layout="@layout/fragment_movie" >
+        tools:layout="@layout/fragment_movie">
 
         <action
             android:id="@+id/actionMovieToMovieDetail"
@@ -36,8 +36,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
-        </action>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     </fragment>
 
@@ -45,14 +44,13 @@
         android:id="@+id/movieFilterFragment"
         android:name="com.jay.movies.ui.movie.filter.MovieFilterFragment"
         android:label="MovieFilterFragment"
-        tools:layout="@layout/fragment_movie_filter" >
-    </fragment>
+        tools:layout="@layout/fragment_movie_filter" />
 
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.jay.movies.ui.movie.detail.MovieDetailFragment"
         android:label="MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail" >
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movieId"
             app:argType="integer"

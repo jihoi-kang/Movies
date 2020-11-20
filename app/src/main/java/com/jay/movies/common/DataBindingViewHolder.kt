@@ -7,7 +7,7 @@ import com.jay.movies.BR
 
 class DataBindingViewHolder<T>(
     val binding: ViewDataBinding,
-    private val viewModel: ViewModel
+    private val viewModel: ViewModel,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: T) {

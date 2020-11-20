@@ -15,10 +15,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 @InstallIn(ApplicationComponent::class)
 @Module
 class RoomModule {
+
     @Provides
     @Reusable
     fun provideRoom(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "Movies.db")
         .allowMainThreadQueries()
         .build()
@@ -26,13 +27,13 @@ class RoomModule {
     @Provides
     @Reusable
     fun provideMovieDao(
-        appDatabase: AppDatabase
-    ) : MovieDao = appDatabase.movieDao()
+        appDatabase: AppDatabase,
+    ): MovieDao = appDatabase.movieDao()
 
     @Provides
     @Reusable
     fun provideGenreDao(
-        appDatabase: AppDatabase
-    ) : GenreDao = appDatabase.genreDao()
+        appDatabase: AppDatabase,
+    ): GenreDao = appDatabase.genreDao()
 
 }

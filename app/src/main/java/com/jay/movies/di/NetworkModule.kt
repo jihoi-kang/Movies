@@ -18,8 +18,10 @@ class NetworkModule {
 
     @Provides
     @Reusable
-    fun provideMovieService(): MovieService {
-        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+    fun provideRetrofit(): Retrofit {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        }
 
         val client = OkHttpClient.Builder()
             .addInterceptor(logger)
@@ -30,6 +32,11 @@ class NetworkModule {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(MovieService::class.java)
     }
+
+    @Provides
+    @Reusable
+    fun provideMovieService(retrofit: Retrofit): MovieService =
+        retrofit.create(MovieService::class.java)
+
 }

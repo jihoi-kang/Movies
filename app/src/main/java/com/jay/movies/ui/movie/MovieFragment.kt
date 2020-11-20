@@ -41,13 +41,13 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
         initView()
         initObserve()
 
-        movieViewModel.movieResult.value?: let {
+        movieViewModel.movieResult.value ?: let {
             movieViewModel.fetchMovies(movieViewModel.selectedFilter.sortByName)
         }
     }
 
     private fun initFilter() {
-        if(movieViewModel.allFilters.isEmpty()) {
+        if (movieViewModel.allFilters.isEmpty()) {
             movieViewModel.selectedFilter = Filter(getString(R.string.filter_popularity))
 
             movieViewModel.allFilters = listOf(
@@ -79,9 +79,10 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
     private fun initObserve() {
         movieViewModel.movieResult.observe(viewLifecycleOwner) { result ->
             binding.fabFilter.isVisible = true
-            when(result) {
+            when (result) {
                 is MovieResult.Success -> result.data.toMutableList().let(movieAdapter::submitList)
-                is MovieResult.Error -> { }
+                is MovieResult.Error -> {
+                }
             }
         }
 

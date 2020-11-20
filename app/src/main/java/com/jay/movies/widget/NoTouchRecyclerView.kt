@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class NoTouchRecyclerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean = false

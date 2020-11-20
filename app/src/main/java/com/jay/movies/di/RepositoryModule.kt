@@ -23,9 +23,9 @@ class RepositoryModule {
         movieDao: MovieDao,
         genreDao: GenreDao,
     ): MovieRepository = MovieRepository(
-            movieService,
-            movieDao,
-            genreDao
-        )
+        movieService,
+        movieDao,
+        genreDao
+    )
 
 }

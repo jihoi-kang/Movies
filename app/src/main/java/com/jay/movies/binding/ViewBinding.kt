@@ -16,7 +16,6 @@ import com.jay.movies.R
 import com.jay.movies.api.Api.getBackdropPath
 import com.jay.movies.model.Genre
 import com.jay.movies.ui.movie.GenreAdapter
-import com.jay.movies.ui.movie.MovieViewModel
 
 @BindingAdapter(value = ["isRefreshing"])
 fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
@@ -62,7 +61,7 @@ fun RecyclerView.bindHome(allGenres: List<Genre>, genreIds: List<Int>?) {
         val genres = mutableListOf<Genre>()
         genreIds.forEach { id ->
             allGenres.forEach { genre ->
-                if(genre.id == id) genres.add(genre)
+                if (genre.id == id) genres.add(genre)
             }
         }
 

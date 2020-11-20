@@ -1,14 +1,14 @@
 package com.jay.movies.common
 
 open class Event<out T>(
-    private val content: T
+    private val content: T,
 ) {
 
     var hasBeenHandled = false
         private set
 
     fun getContentIfNotHandled(): T? {
-        return if(hasBeenHandled) {
+        return if (hasBeenHandled) {
             null
         } else {
             hasBeenHandled = true

@@ -44,13 +44,13 @@ class MovieFilterFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieFilte
             chip.text = filter.name
             chip.setOnClickListener { _selectedFilter = filter }
             binding.filterChipGroup.addView(chip)
-            if(_selectedFilter.name == filter.name) {
+            if (_selectedFilter.name == filter.name) {
                 binding.filterChipGroup.check(id)
             }
         }
 
         binding.fabSubmit.setOnClickListener {
-            if(cacheFilter.name != _selectedFilter.name) {
+            if (cacheFilter.name != _selectedFilter.name) {
                 movieViewModel.selectedFilter = _selectedFilter
                 movieViewModel.onClickSubmit()
             }

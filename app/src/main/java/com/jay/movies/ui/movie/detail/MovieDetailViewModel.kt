@@ -7,13 +7,11 @@ import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
 import com.jay.movies.data.MovieRepository
 import com.jay.movies.model.Movie
-import com.jay.movies.model.Video
 import kotlinx.coroutines.flow.flowOn
-import java.lang.StringBuilder
 
 class MovieDetailViewModel @ViewModelInject constructor(
     dispatcherProvider: DispatcherProvider,
-    movieRepository: MovieRepository
+    movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
     private val _id: MutableLiveData<Int> = MutableLiveData()

@@ -22,5 +22,5 @@ data class Movie(
     val popularity: Float = 0f,
     val vote_count: Int = 0,
     val video: Boolean = false,
-    val vote_average: Float = 0f
+    val vote_average: Float = 0f,
 ) : Parcelable

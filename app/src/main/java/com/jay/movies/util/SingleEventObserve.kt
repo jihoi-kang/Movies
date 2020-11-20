@@ -9,8 +9,8 @@ import com.jay.movies.common.Event
 @MainThread
 inline fun <T> LiveData<Event<T>>.eventObserve(
     owner: LifecycleOwner,
-    crossinline onChanged: (T) -> Unit
-) : Observer<Event<T>> {
+    crossinline onChanged: (T) -> Unit,
+): Observer<Event<T>> {
     val wrappedObserver = Observer<Event<T>> { event ->
         event.getContentIfNotHandled()?.let {
             onChanged.invoke(it)

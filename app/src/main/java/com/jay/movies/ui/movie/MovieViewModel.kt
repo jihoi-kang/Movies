@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class MovieViewModel @ViewModelInject constructor(
     private val dispatchers: DispatcherProvider,
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
     private val TAG = this::class.java.simpleName
@@ -28,7 +28,7 @@ class MovieViewModel @ViewModelInject constructor(
     private val sortByLiveData = MutableLiveData<String>()
     val movieResult: LiveData<MovieResult> = sortByLiveData.switchMap { sortBy ->
         liveData {
-            if(allGenres.isEmpty()) {
+            if (allGenres.isEmpty()) {
                 allGenres = movieRepository.fetchGenres()
             }
 

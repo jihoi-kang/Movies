@@ -1,10 +1,9 @@
 package com.jay.movies.data
 
-import com.jay.movies.api.MovieService
 import com.jay.movies.api.MovieResult
+import com.jay.movies.api.MovieService
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
-import com.jay.movies.model.Video
 import com.jay.movies.room.GenreDao
 import com.jay.movies.room.MovieDao
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +49,7 @@ class MovieRepository @Inject constructor(
     fun getById(id: Int): Flow<Movie> = flow {
         val movie = movieDao.getMovie(id)
         var videos = movie.videos ?: emptyList()
-        if(videos.isNullOrEmpty()) {
+        if (videos.isNullOrEmpty()) {
             try {
                 val response = movieService.fetchMovieVideos(id)
                 videos = response.results

@@ -13,7 +13,6 @@ import com.jay.movies.R
 import com.jay.movies.api.Api
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieDetailBinding
-import com.jay.movies.ui.movie.MovieAdapter
 import com.jay.movies.util.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +47,7 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
         binding.toolbar.run {
             setNavigationOnClickListener { findNavController().navigateUp() }
             setOnMenuItemClickListener { item ->
-                when(item.itemId) {
+                when (item.itemId) {
                     R.id.menu_share -> {
                         viewModel.onClickShare()
                         true

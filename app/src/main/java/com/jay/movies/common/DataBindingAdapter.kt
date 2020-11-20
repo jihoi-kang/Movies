@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.ListAdapter
 
 abstract class DataBindingAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>,
-    private val viewModel: ViewModel
+    private val viewModel: ViewModel,
 ) : ListAdapter<T, DataBindingViewHolder<T>>(diffCallback) {
 
     private val TAG = this::class.java.simpleName
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder<T> {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
+        val binding =
+            DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, viewType, parent, false)
         return DataBindingViewHolder(binding, viewModel)
     }
 
