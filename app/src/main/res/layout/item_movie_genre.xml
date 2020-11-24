@@ -5,11 +5,12 @@
 
     <data>
 
+        <import type="androidx.core.content.ContextCompat" />
+
         <variable
             name="item"
             type="com.jay.movies.model.Genre" />
 
-        <import type="androidx.core.content.ContextCompat" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +21,7 @@
         tools:background="@android:color/white">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/sessionChip1"
+            android:id="@+id/sessionChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_stroke_black_radius_10"
