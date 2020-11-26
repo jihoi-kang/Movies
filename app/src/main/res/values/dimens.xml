@@ -4,6 +4,16 @@
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="fab_filter_bottom_margin">24dp</dimen>
 
-    <dimen name="movie_post_image_width">100dp</dimen>
-    <dimen name="movie_post_image_height">150dp</dimen>
+    <dimen name="movie_post_width">100dp</dimen>
+    <dimen name="movie_post_height">150dp</dimen>
+
+    <dimen name="youtube_thumbnail_width">150dp</dimen>
+    <dimen name="youtube_thumbnail_height">100dp</dimen>
+
+    <dimen name="space_xx_small">4dp</dimen>
+    <dimen name="space_x_small">6dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_median">12dp</dimen>
+    <dimen name="space_large">16dp</dimen>
+    <dimen name="space_x_large">20dp</dimen>
 </resources>

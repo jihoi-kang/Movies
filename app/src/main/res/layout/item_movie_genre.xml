@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="androidx.core.content.ContextCompat" />
-
         <variable
             name="item"
             type="com.jay.movies.model.Genre" />
@@ -16,8 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
+        android:paddingEnd="@dimen/space_small"
+        android:paddingBottom="@dimen/space_xx_small"
         tools:background="@color/common_background">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -25,10 +23,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_stroke_movie_genre_radius_10"
-            android:paddingStart="8dp"
-            android:paddingTop="6dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="6dp"
+            android:paddingStart="@dimen/space_small"
+            android:paddingTop="@dimen/space_x_small"
+            android:paddingEnd="@dimen/space_small"
+            android:paddingBottom="@dimen/space_x_small"
             android:text="@{item.name}"
             android:textColor="@color/movie_genre"
             android:textSize="10sp"

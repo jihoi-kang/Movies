@@ -62,12 +62,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/space_large">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_large"
                         android:gravity="center"
                         android:lineSpacingExtra="6dp"
                         android:text="@{item.title}"
@@ -79,7 +79,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/space_small"
                         android:gravity="center"
                         android:text="@{item.release_date}"
                         android:textColor="@color/common_content"
@@ -91,14 +91,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/space_small"
                         android:rating="@{item.vote_average / 2}"
                         tools:rating="2.5f" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_large"
                         android:text="@string/trailers"
                         android:textColor="@color/common_title"
                         android:textSize="18sp"
@@ -108,7 +108,7 @@
                         android:id="@+id/rv_video"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/space_small"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_video" />
@@ -116,7 +116,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_large"
                         android:text="@string/summary"
                         android:textColor="@color/common_title"
                         android:textSize="18sp"
@@ -125,7 +125,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/space_small"
                         android:lineSpacingExtra="6dp"
                         android:text="@{item.overview}"
                         android:textColor="@color/common_content"
