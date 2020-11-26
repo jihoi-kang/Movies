@@ -9,7 +9,7 @@ buildscript {
         targetSdkVersion = 30
 
         // application dependencies
-        buildGradleVersion = '4.0.2'
+        buildGradleVersion = '4.1.1'
         androidxVersion = '1.0.0'
         accompatVersion = '1.2.0'
         androidActivity = '1.1.0'
@@ -22,7 +22,7 @@ buildscript {
         fragmentKtxVersion = '2.3.1'
         navigationVersion = '2.3.1'
         flexboxVersion = '2.0.1'
-        kotlinVersion = '1.4.10'
+        kotlinVersion = '1.4.20'
         lifecycleVersion = '2.2.0'
         roomVersion = '2.2.5'
         glideVersion = '4.11.0'
