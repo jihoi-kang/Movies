@@ -18,19 +18,19 @@
         android:layout_height="wrap_content"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
-        tools:background="@android:color/white">
+        tools:background="@color/common_background">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sessionChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_stroke_black_radius_10"
+            android:background="@drawable/bg_stroke_movie_genre_radius_10"
             android:paddingStart="8dp"
             android:paddingTop="6dp"
             android:paddingEnd="8dp"
             android:paddingBottom="6dp"
             android:text="@{item.name}"
-            android:textColor="@color/movie_genre_text"
+            android:textColor="@color/movie_genre"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/item_movie_background"
+        android:background="@color/common_background"
         android:foreground="?attr/selectableItemBackground"
         android:onClick="@{() -> viewModel.onClickItem(item.id)}"
         android:paddingStart="8dp"
@@ -45,7 +45,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@{item.release_date}"
-            android:textColor="#00d0a8"
+            android:textColor="@color/movie_release_date"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_movie_post"

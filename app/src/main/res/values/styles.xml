@@ -13,13 +13,13 @@
 
     <style name="ToolbarTitleText">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/toolbar_textColor</item>
+        <item name="android:textColor">@color/common_title</item>
     </style>
 
     <style name="Widget.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/toolbar_height</item>
-        <item name="android:background">@color/toolbar_background</item>
+        <item name="android:background">@color/common_background</item>
         <item name="titleTextAppearance">@style/ToolbarTitleText</item>
         <item name="contentInsetStart">24dp</item>
     </style>

@@ -2,27 +2,22 @@
 <resources>
 
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#C7C7C7</color>
+    <color name="colorPrimaryDark">#121212</color>
     <color name="colorAccent">#EE5050</color>
     <color name="colorBorder">#a0a0a0</color>
 
-    <!--toolbar-->
-    <color name="toolbar_background">#FFFFFF</color>
-    <color name="toolbar_textColor">#2F2E32</color>
-
     <!--bottom navigation menu-->
-    <color name="bottom_nav_selected">#2e2e33</color>
-    <color name="bottom_nav_unselected">#d0d0d0</color>
+    <color name="bottom_nav_selected">#DE000000</color>
+    <color name="bottom_nav_unselected">#61000000</color>
 
-    <!-- movie -->
-    <color name="item_movie_background">#FFFFFF</color>
-    <color name="movie_detail_title">#2f2e32</color>
-    <color name="movie_detail_content">#9b9b9b</color>
-    <color name="movie_genre_text">#2e2e33</color>
+    <!-- common -->
+    <color name="common_background">#FFFFFF</color>
+    <color name="common_title">#000000</color>
+    <color name="common_content">#B3000000</color>
 
-    <!-- theme -->
-    <color name="theme_title">#2f2e32</color>
-    <color name="theme_content">#9b9b9b</color>
+    <!-- movie detail -->
+    <color name="movie_release_date">#00d0a8</color>
+    <color name="movie_genre">#99000000</color>
 
     <!-- video -->
     <color name="item_video_title">#FFFFFF</color>

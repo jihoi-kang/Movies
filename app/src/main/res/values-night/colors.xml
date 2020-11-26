@@ -6,18 +6,20 @@
     <color name="colorAccent">#EE5050</color>
     <color name="colorBorder">#a0a0a0</color>
 
-    <!--toolbar-->
-    <color name="toolbar_background">#333</color>
-    <color name="toolbar_textColor">#2F2E32</color>
-
     <!--bottom navigation menu-->
-    <color name="bottom_nav_selected">#2e2e33</color>
-    <color name="bottom_nav_unselected">#d0d0d0</color>
+    <color name="bottom_nav_selected">#DEFFFFFF</color>
+    <color name="bottom_nav_unselected">#61FFFFFF</color>
+
+    <!-- common -->
+    <color name="common_background">#1C1C1E</color>
+    <color name="common_title">#DEFFFFFF</color>
+    <color name="common_content">#99FFFFFF</color>
 
     <!-- movie -->
-    <color name="item_movie_background">#121212</color>
-    <color name="movie_detail_title">#2f2e32</color>
-    <color name="movie_detail_content">#9b9b9b</color>
-    <color name="movie_genre_text">#2e2e33</color>
+    <color name="movie_release_date">#00d0a8</color>
+    <color name="movie_genre">#99FFFFFF</color>
+
+    <!-- video -->
+    <color name="item_video_title">#FFFFFF</color>
 
 </resources>
