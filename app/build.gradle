@@ -57,8 +57,8 @@ dependencies {
     // Jetpack
     implementation "androidx.appcompat:appcompat:$accompatVersion"
     implementation "androidx.core:core-ktx:$coreKtxVersion"
-    implementation "androidx.activity:activity:$androidActivity"
-    implementation "androidx.fragment:fragment:$androidFragment"
+    implementation "androidx.activity:activity-ktx:$androidActivity"
+    implementation "androidx.fragment:fragment-ktx:$androidFragment"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
