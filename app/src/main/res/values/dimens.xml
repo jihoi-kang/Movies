@@ -16,4 +16,7 @@
     <dimen name="space_median">12dp</dimen>
     <dimen name="space_large">16dp</dimen>
     <dimen name="space_x_large">20dp</dimen>
+
+    <dimen name="theme_min_width">280dp</dimen>
+
 </resources>

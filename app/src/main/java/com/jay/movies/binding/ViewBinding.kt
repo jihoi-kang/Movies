@@ -1,7 +1,9 @@
 package com.jay.movies.binding
 
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -17,21 +19,16 @@ import com.jay.movies.api.Api.getBackdropPath
 import com.jay.movies.model.Genre
 import com.jay.movies.ui.movie.GenreAdapter
 
-@BindingAdapter(value = ["isRefreshing"])
+@BindingAdapter("isRefreshing")
 fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
     this.isRefreshing = isRefreshing
 }
 
-@BindingAdapter(value = ["onRefresh"])
+@BindingAdapter("onRefresh")
 fun SwipeRefreshLayout.bindRefreshListener(onRefreshListener: SwipeRefreshLayout.OnRefreshListener) =
     setOnRefreshListener(onRefreshListener)
 
-@BindingAdapter(value = ["floatText"])
-fun TextView.bindSetText(value: Float) {
-    text = value.toString()
-}
-
-@BindingAdapter(value = ["moviePostImage"])
+@BindingAdapter("moviePostImage")
 fun ImageView.bindPosterImage(posterPath: String?) {
     Glide.with(this)
         .load(getBackdropPath(posterPath))
@@ -41,7 +38,7 @@ fun ImageView.bindPosterImage(posterPath: String?) {
         ).into(this)
 }
 
-@BindingAdapter(value = ["movieBackDropImage"])
+@BindingAdapter("movieBackDropImage")
 fun ImageView.bindBackDropImage(backDropPath: String?) {
     Glide.with(this)
         .load(getBackdropPath(backDropPath))
@@ -72,4 +69,23 @@ fun RecyclerView.bindHome(allGenres: List<Genre>, genreIds: List<Int>?) {
     } else {
         isGone = true
     }
+}
+
+@BindingAdapter("themeText")
+fun TextView.bindThemeText(theme: Int) {
+    setText(when (theme) {
+        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> R.string.theme_use_device
+        AppCompatDelegate.MODE_NIGHT_NO -> R.string.theme_light
+        else -> R.string.theme_dark
+    })
+}
+
+@BindingAdapter("check")
+fun RadioGroup.bindCheck(theme: Int) {
+    check(when (theme) {
+        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> R.id.rb_use_device
+        AppCompatDelegate.MODE_NIGHT_NO -> R.id.rb_light
+        AppCompatDelegate.MODE_NIGHT_YES -> R.id.rb_dark
+        else -> -1
+    })
 }

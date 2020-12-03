@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,6 +9,11 @@
         <variable
             name="vm"
             type="com.jay.movies.ui.setting.SettingViewModel" />
+
+        <variable
+            name="systemVm"
+            type="com.jay.movies.ui.system.SystemViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +33,7 @@
             android:id="@+id/cl_theme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.onClickTheme()}"
             android:paddingStart="@dimen/space_small"
             android:paddingEnd="@dimen/space_small"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +56,7 @@
                 android:layout_marginStart="@dimen/space_xx_small"
                 android:layout_marginTop="@dimen/space_small"
                 android:gravity="center_vertical"
-                android:text="@string/theme"
+                android:text="@string/text_appearance"
                 android:textColor="@color/common_title"
                 app:layout_constraintStart_toEndOf="@id/iv_theme_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,10 +68,10 @@
                 android:layout_marginStart="@dimen/space_xx_small"
                 android:layout_marginTop="@dimen/space_small"
                 android:gravity="center_vertical"
-                android:text="The theme change when click me!"
                 android:textColor="@color/common_content"
                 app:layout_constraintStart_toEndOf="@id/iv_theme_icon"
                 app:layout_constraintTop_toBottomOf="@+id/tv_theme_title"
+                bind:themeText="@{systemVm.currentTheme.peekContent()}"
                 tools:text="@string/theme_light" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

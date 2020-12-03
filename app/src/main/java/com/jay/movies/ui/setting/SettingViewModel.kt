@@ -6,15 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 
-class SettingViewModel @ViewModelInject constructor(
-//    private val preference: SharedPreferences
-) : BaseViewModel() {
+class SettingViewModel @ViewModelInject constructor() : BaseViewModel() {
 
-    private val _themeEvent = MutableLiveData<Event<Int>>()
-    val themeEvent: LiveData<Event<Int>> get() = _themeEvent
+    private val _themeClickEvent = MutableLiveData<Event<Unit>>()
+    val themeClickEvent: LiveData<Event<Unit>> get() = _themeClickEvent
 
-    fun onClickTheme(theme: Int) {
-        _themeEvent.value = Event(theme)
+    fun onClickTheme() {
+        _themeClickEvent.value = Event(Unit)
     }
 
 }

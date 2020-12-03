@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.appcompat.app.AppCompatDelegate" />
+
+        <variable
+            name="vm"
+            type="com.jay.movies.ui.setting.theme.ThemeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="@dimen/theme_min_width"
+        tools:background="?colorSurface"
+        tools:context=".ui.setting.theme.ThemeDialogFragment">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_x_large"
+            android:layout_marginBottom="@dimen/space_large"
+            android:paddingStart="@dimen/space_x_large"
+            android:paddingEnd="@dimen/space_x_large"
+            android:text="@string/text_appearance"
+            android:textColor="@color/common_title"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/rg_radio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_radio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/btn_cancel"
+            android:paddingStart="@dimen/space_large"
+            android:paddingEnd="@dimen/space_large"
+            app:layout_constraintBottom_toTopOf="@id/btn_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            bind:check="@{vm.themeClickEvent.peekContent()}"
+            tools:checkedButton="@id/rb_use_device">
+
+            <RadioButton
+                android:id="@+id/rb_use_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="?colorOnSurface"
+                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)}"
+                android:padding="@dimen/space_small"
+                android:text="@string/theme_use_device"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="?colorOnSurface"
+                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_NO)}"
+                android:padding="@dimen/space_small"
+                android:text="@string/theme_light"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="?colorOnSurface"
+                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_YES)}"
+                android:padding="@dimen/space_small"
+                android:text="@string/theme_dark"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xx_small"
+            android:layout_marginEnd="@dimen/space_median"
+            android:layout_marginBottom="@dimen/space_xx_small"
+            android:background="@null"
+            android:onClick="@{() -> vm.close()}"
+            android:text="@string/text_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/common_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg_radio" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

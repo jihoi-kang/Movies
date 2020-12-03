@@ -1,12 +1,14 @@
 package com.jay.movies.ui.setting
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentSettingBinding
+import com.jay.movies.ui.system.SystemViewModel
 import com.jay.movies.util.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,27 +19,23 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>(
 ) {
     private val TAG = this::class.java.simpleName
 
+    private val systemViewModel: SystemViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
-        initObserve()
+        setupView()
+        setupObserve()
     }
 
-    private fun initView() {
-        binding.clTheme.setOnClickListener {
-            when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES ->
-                    viewModel.onClickTheme(AppCompatDelegate.MODE_NIGHT_NO)
-                Configuration.UI_MODE_NIGHT_NO ->
-                    viewModel.onClickTheme(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-        }
+    private fun setupView() {
+        binding.setVariable(BR.systemVm, systemViewModel)
     }
 
-    private fun initObserve() {
-        viewModel.themeEvent.eventObserve(viewLifecycleOwner) { theme ->
-            AppCompatDelegate.setDefaultNightMode(theme)
+    private fun setupObserve() {
+        viewModel.themeClickEvent.eventObserve(viewLifecycleOwner) {
+            val action = SettingFragmentDirections.actionSettingToTheme()
+            findNavController().navigate(action)
         }
     }
 

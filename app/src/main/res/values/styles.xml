@@ -24,4 +24,10 @@
         <item name="contentInsetStart">24dp</item>
     </style>
 
+    <style name="Theme.Movies.Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="colorSurface">@color/common_background</item>
+        <item name="dialogCornerRadius">4dp</item>
+        <item name="android:backgroundDimAmount">0.75</item>
+    </style>
+
 </resources>
