@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.api.Api
@@ -23,33 +21,32 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 ) {
     private val TAG = this::class.java.simpleName
 
-    private lateinit var videoAdapter: VideoAdapter
-
     private val args: MovieDetailFragmentArgs by navArgs()
+
+    private val videoAdapter: VideoAdapter by lazy {
+        VideoAdapter(viewModel)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMovie(args.movieId)
+        viewModel.getMovieTrailer(args.movie.id)
 
-        initView()
-        initMenu()
-        initObserve()
+        setupView()
+        setupObserve()
     }
 
-    private fun initView() {
-        videoAdapter = VideoAdapter(viewModel)
+    private fun setupView() {
+        binding.setVariable(BR.item, args.movie)
         binding.rvVideo.adapter = videoAdapter
-        val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        binding.rvVideo.layoutManager = layoutManager
-    }
-
-    private fun initMenu() {
         binding.toolbar.run {
-            setNavigationOnClickListener { findNavController().navigateUp() }
+            setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.menu_share -> {
-                        viewModel.onClickShare()
+                        val movie = binding.item ?: return@setOnMenuItemClickListener false
+                        viewModel.onClickShare(movie)
                         true
                     }
                     else -> false
@@ -58,12 +55,7 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
         }
     }
 
-    private fun initObserve() {
-        viewModel.movieContents.observe(viewLifecycleOwner) {
-            binding.setVariable(BR.item, it)
-            it.videos?.toMutableList().let(videoAdapter::submitList)
-        }
-
+    private fun setupObserve() {
         viewModel.shareEvent.eventObserve(viewLifecycleOwner) {
             startActivity(Intent().apply {
                 action = Intent.ACTION_SEND
@@ -71,8 +63,7 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
                 type = "text/plain"
             })
         }
-
-        viewModel.itemEvent.eventObserve(viewLifecycleOwner) {
+        viewModel.videoItemEvent.eventObserve(viewLifecycleOwner) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(it))))
         }
     }

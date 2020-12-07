@@ -10,51 +10,65 @@ import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieFilterBinding
 import com.jay.movies.model.Filter
-import com.jay.movies.ui.movie.MovieEmptyViewModel
 import com.jay.movies.ui.movie.MovieViewModel
+import com.jay.movies.util.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MovieFilterFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieFilterBinding>(
+class MovieFilterFragment : BaseFragment<MovieFilterViewModel, FragmentMovieFilterBinding>(
     R.layout.fragment_movie_filter,
-    MovieEmptyViewModel::class.java
+    MovieFilterViewModel::class.java
 ) {
     private val TAG = this::class.java.simpleName
 
     private val movieViewModel by activityViewModels<MovieViewModel>()
-    private var _allFilters = listOf<Filter>()
-    private lateinit var _selectedFilter: Filter
-    private lateinit var cacheFilter: Filter
+    private val cacheFilter: Filter by lazy {
+        movieViewModel.currentFilter.value ?: DEFAULT_FILTER
+    }
+
+    private val allFilters: List<Filter> = listOf(
+        Filter("Popularity"),
+        Filter("New"),
+        Filter("Vote average")
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _allFilters = movieViewModel.allFilters
-        _selectedFilter = movieViewModel.selectedFilter
-        cacheFilter = movieViewModel.selectedFilter
+        viewModel.setupFilter(
+            viewModel.currentFilter.value ?: cacheFilter
+        )
 
-        initView()
+        setupView()
+        setupObserve()
     }
 
-    private fun initView() {
-        _allFilters.forEach { filter ->
+    private fun setupView() {
+        allFilters.forEach { filter ->
             val chip = LayoutInflater.from(activity).inflate(R.layout.filter_chip, null) as Chip
             val id = View.generateViewId()
             chip.id = id
             chip.text = filter.name
-            chip.setOnClickListener { _selectedFilter = filter }
+            chip.setOnClickListener { viewModel.setupFilter(filter) }
             binding.filterChipGroup.addView(chip)
-            if (_selectedFilter.name == filter.name) {
+            if (viewModel.currentFilter.value!!.name == filter.name) {
                 binding.filterChipGroup.check(id)
             }
         }
+    }
 
-        binding.fabSubmit.setOnClickListener {
-            if (cacheFilter.name != _selectedFilter.name) {
-                movieViewModel.selectedFilter = _selectedFilter
-                movieViewModel.onClickSubmit()
+    private fun setupObserve() {
+        viewModel.submitEvent.eventObserve(viewLifecycleOwner) {
+            val currentFilter = viewModel.currentFilter.value ?: return@eventObserve
+            if (cacheFilter.name != currentFilter.name) {
+                movieViewModel.setupFilter(currentFilter)
             }
             findNavController().navigateUp()
         }
     }
+
+    companion object {
+        val DEFAULT_FILTER = Filter("Popularity")
+    }
+
 }

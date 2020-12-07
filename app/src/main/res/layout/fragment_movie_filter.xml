@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.jay.movies.ui.movie.filter.MovieFilterViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,6 +36,7 @@
             android:layout_marginBottom="@dimen/fab_filter_bottom_margin"
             android:text="@string/submit"
             android:textAllCaps="false"
+            android:onClick="@{() -> vm.submit()}"
             app:icon="@drawable/ic_filter_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

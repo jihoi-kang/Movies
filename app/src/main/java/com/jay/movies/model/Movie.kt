@@ -7,8 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(primaryKeys = [("id")])
 data class Movie(
-    var page: Int,
-    var videos: List<Video>? = emptyList(),
     val id: Int,
     val poster_path: String? = "",
     val adult: Boolean = false,

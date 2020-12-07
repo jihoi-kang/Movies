@@ -9,7 +9,7 @@
         android:id="@+id/settingFragment"
         android:name="com.jay.movies.ui.setting.SettingFragment"
         android:label="SettingFragment"
-        tools:layout="@layout/fragment_setting" >
+        tools:layout="@layout/fragment_setting">
 
         <action
             android:id="@+id/actionSettingToTheme"
@@ -31,8 +31,8 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim">
             <argument
-                android:name="movieId"
-                app:argType="integer"
+                android:name="movie"
+                app:argType="com.jay.movies.model.Movie"
                 app:nullable="false" />
         </action>
 
@@ -58,8 +58,8 @@
         android:label="MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail">
         <argument
-            android:name="movieId"
-            app:argType="integer"
+            android:name="movie"
+            app:argType="com.jay.movies.model.Movie"
             app:nullable="false" />
     </fragment>
 

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:background="@color/common_background"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onClickItem(item.id)}"
+        android:onClick="@{() -> viewModel.openMovieDetail(item)}"
         android:paddingStart="@dimen/space_small"
         android:paddingTop="@dimen/space_small"
         android:paddingEnd="@dimen/space_small"
@@ -105,8 +105,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
             app:layout_constraintTop_toBottomOf="@id/ll_star"
-            bind:allGenres="@{viewModel.allGenres}"
-            bind:genreIds="@{item.genre_ids}"
             tools:listitem="@layout/item_movie_genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

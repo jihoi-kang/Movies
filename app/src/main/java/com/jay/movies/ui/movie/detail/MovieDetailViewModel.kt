@@ -1,53 +1,51 @@
 package com.jay.movies.ui.movie.detail
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
 import com.jay.movies.base.BaseViewModel
-import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
-import com.jay.movies.data.MovieRepository
+import com.jay.movies.data.movie.MovieRepository
 import com.jay.movies.model.Movie
-import kotlinx.coroutines.flow.flowOn
+import com.jay.movies.model.Video
 
 class MovieDetailViewModel @ViewModelInject constructor(
-    dispatcherProvider: DispatcherProvider,
-    movieRepository: MovieRepository,
+    private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
-    private val _id: MutableLiveData<Int> = MutableLiveData()
+    private val movieIdLiveData: MutableLiveData<Int> = MutableLiveData()
+
+    val trailerVideoItems: LiveData<List<Video>> = movieIdLiveData.switchMap { movieId ->
+        liveData {
+            val videoItems = movieRepository.fetchTrailers(movieId)
+            emit(videoItems)
+        }
+    }
 
     private val _shareEvent = MutableLiveData<Event<String>>()
     val shareEvent: LiveData<Event<String>> = _shareEvent
 
-    val movieContents: LiveData<Movie> = _id.switchMap { movieId ->
-        liveData {
-            val movie = movieRepository.getById(movieId)
+    private val _videoItemEvent = MutableLiveData<Event<String>>()
+    val videoItemEvent: LiveData<Event<String>> get() = _videoItemEvent
 
-            emitSource(movie.flowOn(dispatcherProvider.default()).asLiveData())
+    fun getMovieTrailer(movieId: Int) {
+        movieIdLiveData.value = movieId
+    }
+
+    fun onVideoItemClick(videoKey: String) {
+        _videoItemEvent.value = Event(videoKey)
+    }
+
+    fun onClickShare(movie: Movie) {
+        val movieRecommendation = StringBuilder().apply {
+            append("✋Movie Recommendation!✋\n")
+            append("Title: ${movie.title}\n")
+            append("Release date: ${movie.release_date}\n")
+            append("Vote average: ${movie.vote_average}")
         }
-    }
-
-    fun getMovie(movieId: Int) {
-        _id.value = movieId
-    }
-
-    fun onClickShare() {
-        movieContents.value?.let { movie ->
-            val movieRecommendation = StringBuilder().apply {
-                append("✋Movie Recommendation!✋\n")
-                append("Title: ${movie.title}\n")
-                append("Release date: ${movie.release_date}\n")
-                append("Vote average: ${movie.vote_average}")
-            }
-            _shareEvent.value = Event(movieRecommendation.toString())
-        }
-    }
-
-    private val _itemEvent = MutableLiveData<Event<String>>()
-    val itemEvent: LiveData<Event<String>> get() = _itemEvent
-
-    fun onClickItem(videoKey: String) {
-        _itemEvent.value = Event(videoKey)
+        _shareEvent.value = Event(movieRecommendation.toString())
     }
 
 }

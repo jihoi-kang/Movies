@@ -1,9 +1,10 @@
 package com.jay.movies.di
 
 import com.jay.movies.api.MovieService
-import com.jay.movies.data.MovieRepository
-import com.jay.movies.room.GenreDao
-import com.jay.movies.room.MovieDao
+import com.jay.movies.data.movie.MovieRemoteDataSource
+import com.jay.movies.data.movie.MovieRemoteDataSourceImpl
+import com.jay.movies.data.movie.MovieRepository
+import com.jay.movies.data.movie.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -15,17 +16,31 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @Module
 class RepositoryModule {
 
+//    @Provides
+//    @Reusable
+//    @ExperimentalCoroutinesApi
+//    fun provideMovieRepositoryTemp(
+//        movieService: MovieService,
+//        movieDao: MovieDao,
+//        genreDao: GenreDao,
+//    ): MovieRepositoryTemp = MovieRepositoryTemp(
+//        movieService,
+//        movieDao,
+//        genreDao
+//    )
+
     @Provides
     @Reusable
     @ExperimentalCoroutinesApi
     fun provideMovieRepository(
+        movieRemoteDataSource: MovieRemoteDataSource,
+    ): MovieRepository = MovieRepositoryImpl(movieRemoteDataSource)
+
+    @Provides
+    @Reusable
+    @ExperimentalCoroutinesApi
+    fun provideMovieRemoteDataSource(
         movieService: MovieService,
-        movieDao: MovieDao,
-        genreDao: GenreDao,
-    ): MovieRepository = MovieRepository(
-        movieService,
-        movieDao,
-        genreDao
-    )
+    ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(movieService)
 
 }

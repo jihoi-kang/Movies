@@ -15,8 +15,8 @@ interface MovieDao {
     @Query("SELECT * FROM Movie WHERE id = :id_")
     fun getMovie(id_: Int): Movie
 
-    @Query("SELECT * FROM Movie WHERE page = :page_")
-    fun getMovieList(page_: Int): List<Movie>
+//    @Query("SELECT * FROM Movie WHERE page = :page_")
+//    fun getMovieList(page_: Int): List<Movie>
 
     @Query("DELETE FROM Movie")
     fun clearMovieList()
