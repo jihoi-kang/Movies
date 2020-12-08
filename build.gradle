@@ -24,7 +24,6 @@ buildscript {
         flexboxVersion = '2.0.1'
         kotlinVersion = '1.4.20'
         lifecycleVersion = '2.2.0'
-        roomVersion = '2.2.5'
         glideVersion = '4.11.0'
         glidePaletteVersion = '2.1.2'
         hiltVersion = '2.29.1-alpha'
