@@ -9,6 +9,7 @@ import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.data.movie.MovieRepository
 import com.jay.movies.model.Filter
+import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,6 +29,9 @@ class MovieViewModel @ViewModelInject constructor(
     private val _movieItems = MutableLiveData<List<Movie>>(emptyList())
     val movieItems: LiveData<List<Movie>> get() = _movieItems
 
+    private val _genreItems = MutableLiveData<List<Genre>>()
+    val genreItems: LiveData<List<Genre>> get() = _genreItems
+
     private val _openFilter = MutableLiveData<Event<Unit>>()
     val openFilter: LiveData<Event<Unit>> get() = _openFilter
 
@@ -39,7 +43,7 @@ class MovieViewModel @ViewModelInject constructor(
 
     init {
         _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
-        fetchMovies()
+        fetchGenres()
     }
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
@@ -50,6 +54,13 @@ class MovieViewModel @ViewModelInject constructor(
 
     fun refresh() {
         fetchMovies()
+    }
+
+    private fun fetchGenres() {
+        viewModelScope.launch {
+            _genreItems.value = movieRepository.fetchGenres()
+            fetchMovies()
+        }
     }
 
     private fun fetchMovies() {
@@ -79,21 +90,6 @@ class MovieViewModel @ViewModelInject constructor(
     fun openMovieDetail(movie: Movie) {
         _openMovieEvent.value = Event(movie)
     }
-
-//    var allGenres: List<Genre> = emptyList()
-//
-//    private val sortByLiveData = MutableLiveData<String>()
-//    val movieResult: LiveData<MovieResult> = sortByLiveData.switchMap { sortBy ->
-//        liveData {
-//            if (allGenres.isEmpty()) {
-//                allGenres = movieRepositoryTemp.fetchGenres()
-//            }
-//
-//            val movieResultStream =
-//                movieRepositoryTemp.fetchMovieResultStream(sortBy).asLiveData(dispatchers.main())
-//            emitSource(movieResultStream)
-//        }
-//    }
 
     companion object {
         private const val STARTING_PAGE_INDEX = 1

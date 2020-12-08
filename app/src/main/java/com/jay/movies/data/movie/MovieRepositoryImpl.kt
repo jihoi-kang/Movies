@@ -1,5 +1,6 @@
 package com.jay.movies.data.movie
 
+import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import com.jay.movies.model.Video
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,5 +27,8 @@ class MovieRepositoryImpl(
 
     override suspend fun fetchTrailers(movieId: Int): List<Video> =
         movieRemoteDataSource.fetchTrailers(movieId)
+
+    override suspend fun fetchGenres(): List<Genre> =
+        movieRemoteDataSource.fetchGenres()
 
 }

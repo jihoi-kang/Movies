@@ -25,7 +25,6 @@ import com.jay.movies.model.Video
 import com.jay.movies.ui.movie.GenreAdapter
 import com.jay.movies.ui.movie.MovieAdapter
 import com.jay.movies.ui.movie.detail.VideoAdapter
-import kotlinx.android.synthetic.main.item_video.view.*
 
 @BindingAdapter("isRefreshing")
 fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {

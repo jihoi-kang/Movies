@@ -100,6 +100,8 @@
             android:layout_marginStart="@dimen/space_small"
             android:layout_marginTop="@dimen/space_small"
             android:orientation="horizontal"
+            bind:allGenres="@{viewModel.genreItems}"
+            bind:genreIds="@{item.genre_ids}"
             app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

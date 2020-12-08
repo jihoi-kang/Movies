@@ -61,16 +61,6 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
             val action = MovieFragmentDirections.actionMovieToMovieDetail(movie)
             findNavController().navigate(action)
         }
-//        movieViewModel.itemEvent.eventObserve(viewLifecycleOwner) { movieId ->
-//            val action = MovieFragmentDirections.actionMovieToMovieDetail(movieId)
-//            findNavController().navigate(action)
-//        }
-//
-//        movieViewModel.fabEvent.eventObserve(viewLifecycleOwner) {
-//            binding.fabFilter.isVisible = false
-//            val action = MovieFragmentDirections.actionMovieToMovieFilter()
-//            findNavController().navigate(action)
-//        }
     }
 
 }
