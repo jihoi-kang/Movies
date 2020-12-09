@@ -41,6 +41,8 @@ class MovieViewModel @ViewModelInject constructor(
     private val _openMovieEvent = MutableLiveData<Event<Movie>>()
     val openMovieEvent: LiveData<Event<Movie>> get() = _openMovieEvent
 
+    private var isRequestInProgress = false
+
     init {
         _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
         fetchGenres()
@@ -64,15 +66,18 @@ class MovieViewModel @ViewModelInject constructor(
     }
 
     private fun fetchMovies() {
+        if (isRequestInProgress) return
         val sortByName = currentFilter.value?.sortByName ?: return
 
         viewModelScope.launch {
+            isRequestInProgress = true
             _movieItems.postValue(
                 movieRepository.fetchMovies(
                     sortByName,
                     lastRequestedPage++
                 )
             )
+            isRequestInProgress = false
         }
     }
 
