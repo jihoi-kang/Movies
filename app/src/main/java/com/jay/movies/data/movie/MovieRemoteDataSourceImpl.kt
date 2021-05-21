@@ -6,7 +6,7 @@ import com.jay.movies.model.Movie
 import com.jay.movies.model.Video
 
 class MovieRemoteDataSourceImpl(
-    private val movieService: MovieService
+    private val movieService: MovieService,
 ) : MovieRemoteDataSource {
 
     override suspend fun fetchMovies(sortBy: String, page: Int): List<Movie> =
