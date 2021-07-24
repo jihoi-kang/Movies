@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.model.Filter
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MovieFilterViewModel : BaseViewModel() {
+@HiltViewModel
+class MovieFilterViewModel @Inject constructor() : BaseViewModel() {
 
     private val _currentFilter = MutableLiveData<Filter>()
     val currentFilter: LiveData<Filter> get() = _currentFilter

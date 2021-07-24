@@ -21,15 +21,13 @@ def getProperty(String filename, String propName) {
 }
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
-
+    compileSdkVersion Versions.compile_sdk
     defaultConfig {
         applicationId "com.jay.movies"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.min_sdk
+        targetSdkVersion Versions.target_sdk
+        versionCode Versions.version_code
+        versionName Versions.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "TMDB_API_KEY", "\"${getProperty("local.properties", "tmdb_api_key")}\""
@@ -54,49 +52,38 @@ android {
 }
 
 dependencies {
-    // Jetpack
-    implementation "androidx.appcompat:appcompat:$accompatVersion"
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
-    implementation "androidx.activity:activity-ktx:$androidActivity"
-    implementation "androidx.fragment:fragment-ktx:$androidFragment"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$fragmentKtxVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$uiKtxVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation "com.google.android:flexbox:$flexboxVersion"
+    implementation Libs.x
+    implementation Libs.material
+    implementation Libs.recyclerview
+    implementation Libs.constraint_layout
+    implementation Libs.core
+    implementation Libs.activity_ktx
+    implementation Libs.fragment_ktx
+    implementation Libs.navigation_ui
+    implementation Libs.navigation_fragment
+    implementation Libs.lifecycle
+    implementation Libs.lifecycle_livedata
 
-    // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation Libs.kotlin
+    implementation Libs.coroutines_core
+    implementation Libs.coroutines_android
 
-    // architecture components
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation Libs.flexbox
 
-    // glide
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
-    implementation "com.github.florent37:glidepalette:$glidePaletteVersion"
-    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation Libs.glide
+    implementation Libs.glide_palette
+    kapt Libs.glide_compiler
 
-    // di
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltViewModelVersion"
+    implementation Libs.hilt
+    implementation Libs.hilt_viewmodel
+    kapt Libs.hilt_compiler
 
-    // network
-    implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation Libs.retrofit
+    implementation Libs.retrofit_converter
+    implementation Libs.okhttp_logging
+    implementation Libs.gson
 
-    // unit test
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.ext:junit:$androidxTest"
-
+    testImplementation Libs.junit
+    androidTestImplementation Libs.espresso
+    androidTestImplementation Libs.x_test
 }

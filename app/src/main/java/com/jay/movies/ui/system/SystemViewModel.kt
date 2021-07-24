@@ -3,7 +3,6 @@ package com.jay.movies.ui.system
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,9 +10,12 @@ import com.jay.movies.MovieApplication
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SystemViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SystemViewModel @Inject constructor(
     dispatchers: DispatcherProvider,
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {

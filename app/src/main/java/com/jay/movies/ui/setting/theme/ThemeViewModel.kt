@@ -10,9 +10,12 @@ import com.jay.movies.MovieApplication
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ThemeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ThemeViewModel @Inject constructor(
     dispatchers: DispatcherProvider,
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {

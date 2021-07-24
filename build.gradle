@@ -2,39 +2,10 @@
 buildscript {
 
     ext {
-        // sdk and tools
-        compileSdkVersion = 30
-        buildToolsVersion = "30.0.2"
-        minSdkVersion = 23
-        targetSdkVersion = 30
-
-        // application dependencies
         buildGradleVersion = '4.1.1'
-        androidxVersion = '1.0.0'
-        accompatVersion = '1.2.0'
-        androidActivity = '1.1.0'
-        androidFragment = '1.2.5'
-        coreKtxVersion = '1.3.2'
-        materialVersion = '1.2.1'
-        recyclerVersion = '1.1.0'
-        constraintLayoutVersion = '2.0.4'
-        uiKtxVersion = '2.3.1'
-        fragmentKtxVersion = '2.3.1'
-        navigationVersion = '2.3.1'
-        flexboxVersion = '2.0.1'
         kotlinVersion = '1.4.20'
-        lifecycleVersion = '2.2.0'
-        glideVersion = '4.11.0'
-        glidePaletteVersion = '2.1.2'
-        hiltVersion = '2.29.1-alpha'
-        hiltViewModelVersion = '1.0.0-alpha02'
-        coroutinesVersion = "1.3.9"
-        gsonVersion = '2.8.6'
-        retrofitVersion = '2.9.0'
-        okhttpLoggingVersion = '4.9.0'
-        junitVersion = '4.13'
-        espressoVersion = '3.3.0'
-        androidxTest = '1.1.2'
+        navigationVersion = '2.3.1'
+        hiltVersion = '2.38'
     }
 
     repositories {

@@ -9,25 +9,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class RepositoryModule {
-
-//    @Provides
-//    @Reusable
-//    @ExperimentalCoroutinesApi
-//    fun provideMovieRepositoryTemp(
-//        movieService: MovieService,
-//        movieDao: MovieDao,
-//        genreDao: GenreDao,
-//    ): MovieRepositoryTemp = MovieRepositoryTemp(
-//        movieService,
-//        movieDao,
-//        genreDao
-//    )
 
     @Provides
     @Reusable

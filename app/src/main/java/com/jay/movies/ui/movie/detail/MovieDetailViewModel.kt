@@ -1,6 +1,5 @@
 package com.jay.movies.ui.movie.detail
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -10,8 +9,11 @@ import com.jay.movies.common.Event
 import com.jay.movies.data.movie.MovieRepository
 import com.jay.movies.model.Movie
 import com.jay.movies.model.Video
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MovieDetailViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 

@@ -1,6 +1,5 @@
 package com.jay.movies.ui.movie
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -12,11 +11,14 @@ import com.jay.movies.model.Filter
 import com.jay.movies.model.Genre
 import com.jay.movies.model.Movie
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class MovieViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
