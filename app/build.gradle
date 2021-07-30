@@ -5,32 +5,23 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
-def getProperty(String filename, String propName) {
-    def propsFile = rootProject.file(filename)
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
-        if (props[propName] != null) {
-            return props[propName]
-        } else {
-            print("No such property " + propName + " in file " + filename)
-        }
-    } else {
-        print(filename + " does not exist!")
-    }
-}
+def STRING = 'String'
+def TMDB_API_KEY = 'TMDB_API_KEY'
+def BUILD_TIME = 'BUILD_TIME'
 
 android {
-    compileSdkVersion Versions.compile_sdk
+    compileSdkVersion Configs.compileSdk
     defaultConfig {
-        applicationId "com.jay.movies"
-        minSdkVersion Versions.min_sdk
-        targetSdkVersion Versions.target_sdk
-        versionCode Versions.version_code
-        versionName Versions.version_name
+        applicationId Configs.applicationId
+        minSdkVersion Configs.minSdk
+        targetSdkVersion Configs.targetSdk
+        versionCode Configs.versionCode
+        versionName Configs.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "TMDB_API_KEY", "\"${getProperty("local.properties", "tmdb_api_key")}\""
+        buildConfigField STRING, TMDB_API_KEY, "\"${Configs.tmdbApiKey}\""
+        buildConfigField STRING, BUILD_TIME, "\"${Configs.buildTime}\""
+        setProperty("archivesBaseName", "${Configs.archivesBaseName}")
     }
     buildTypes {
         release {
@@ -52,38 +43,47 @@ android {
 }
 
 dependencies {
-    implementation Libs.x
-    implementation Libs.material
-    implementation Libs.recyclerview
-    implementation Libs.constraint_layout
-    implementation Libs.core
-    implementation Libs.activity_ktx
-    implementation Libs.fragment_ktx
-    implementation Libs.navigation_ui
-    implementation Libs.navigation_fragment
-    implementation Libs.lifecycle
-    implementation Libs.lifecycle_livedata
+    // kotlin
+    implementation Dependencies.kotlin
 
-    implementation Libs.kotlin
-    implementation Libs.coroutines_core
-    implementation Libs.coroutines_android
+    // android supports
+    implementation Dependencies.x
+    implementation Dependencies.material
+    implementation Dependencies.recyclerview
+    implementation Dependencies.constraintLayout
+    implementation Dependencies.core
+    implementation Dependencies.activityKtx
+    implementation Dependencies.fragmentKtx
+    implementation Dependencies.flexbox
 
-    implementation Libs.flexbox
+    // architecture components
+    implementation Dependencies.navigationUi
+    implementation Dependencies.navigationFragment
+    implementation Dependencies.lifecycle
+    implementation Dependencies.lifecycleLivedata
 
-    implementation Libs.glide
-    implementation Libs.glide_palette
-    kapt Libs.glide_compiler
+    // coroutines
+    implementation Dependencies.coroutinesCore
+    implementation Dependencies.coroutinesAndroid
 
-    implementation Libs.hilt
-    implementation Libs.hilt_viewmodel
-    kapt Libs.hilt_compiler
+    // image loader
+    implementation Dependencies.glide
+    implementation Dependencies.glidePalette
+    kapt Dependencies.glideCompiler
 
-    implementation Libs.retrofit
-    implementation Libs.retrofit_converter
-    implementation Libs.okhttp_logging
-    implementation Libs.gson
+    // di
+    implementation Dependencies.hilt
+    implementation Dependencies.hiltViewmodel
+    kapt Dependencies.hiltCompiler
 
-    testImplementation Libs.junit
-    androidTestImplementation Libs.espresso
-    androidTestImplementation Libs.x_test
+    // network
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitConverter
+    implementation Dependencies.okhttpLogging
+    implementation Dependencies.gson
+
+    // test
+    testImplementation Dependencies.junit
+    androidTestImplementation Dependencies.espresso
+    androidTestImplementation Dependencies.xTest
 }
