@@ -8,7 +8,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.florent37.glidepalette.BitmapPalette
@@ -25,15 +24,6 @@ import com.jay.movies.model.Video
 import com.jay.movies.ui.movie.GenreAdapter
 import com.jay.movies.ui.movie.MovieAdapter
 import com.jay.movies.ui.movie.detail.VideoAdapter
-
-@BindingAdapter("isRefreshing")
-fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
-    this.isRefreshing = isRefreshing
-}
-
-@BindingAdapter("onRefresh")
-fun SwipeRefreshLayout.bindRefreshListener(onRefreshListener: SwipeRefreshLayout.OnRefreshListener) =
-    setOnRefreshListener(onRefreshListener)
 
 @BindingAdapter("moviePostImage")
 fun ImageView.bindPosterImage(posterPath: String?) {
