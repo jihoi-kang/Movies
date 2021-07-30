@@ -4,6 +4,7 @@ object Versions {
     const val buildGradle = "4.2.2"
     const val navigation = "2.3.5"
     const val hilt = "2.38"
+    const val ktlintGradle = "10.1.0"
 
     // dependencies
     const val x = "1.3.0"
@@ -36,6 +37,8 @@ object Versions {
     const val junit = "4.13.2"
     const val espresso = "3.4.0"
     const val xTest = "1.1.3"
+
+    const val ktlint = "0.41.0"
 }
 
 object BuildPlugins {
