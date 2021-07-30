@@ -31,6 +31,8 @@ object Versions {
     const val retrofit = "2.9.0"
     const val okhttpLogging = "4.9.0"
 
+    const val timber = "4.7.1"
+
     const val junit = "4.13.2"
     const val espresso = "3.4.0"
     const val xTest = "1.1.3"
@@ -74,6 +76,8 @@ object Dependencies {
     const val retrofitConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLogging}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     const val junit = "junit:junit:${Versions.junit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"

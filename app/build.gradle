@@ -82,6 +82,9 @@ dependencies {
     implementation Dependencies.okhttpLogging
     implementation Dependencies.gson
 
+    // debug
+    implementation Dependencies.timber
+
     // test
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.espresso
