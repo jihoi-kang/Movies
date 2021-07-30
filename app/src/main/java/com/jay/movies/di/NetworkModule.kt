@@ -14,45 +14,63 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 @InstallIn(SingletonComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     @Reusable
-    fun provideRetrofit(): Retrofit {
-        val logger = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-        }
+    fun provideMovieService(retrofit: Retrofit): MovieService =
+        retrofit.create(MovieService::class.java)
 
-        val queryParameter = Interceptor { chain ->
-            val original = chain.request()
-            val url = original.url.newBuilder()
-                .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
-                .build()
-
-            val requestBuilder: Request.Builder = original.newBuilder().url(url)
-
-            val request: Request = requestBuilder.build()
-            chain.proceed(request)
-        }
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(queryParameter)
-            .addInterceptor(logger)
-            .build()
-
+    @Provides
+    @Reusable
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_TMDB_API_PATH)
-            .client(client)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
     @Reusable
-    fun provideMovieService(retrofit: Retrofit): MovieService =
-        retrofit.create(MovieService::class.java)
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        paramInterceptor: Interceptor,
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(paramInterceptor)
+        .addInterceptor(loggingInterceptor)
+        .readTimeout(1, TimeUnit.MINUTES)
+        .writeTimeout(1, TimeUnit.MINUTES)
+        .build()
+
+    @Provides
+    @Reusable
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().apply {
+            level =
+                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+                else HttpLoggingInterceptor.Level.NONE
+        }
+
+    @Provides
+    @Reusable
+    fun provideQueryInterceptor(): Interceptor =
+        Interceptor { chain ->
+            val original = chain.request()
+            val url = original.url.newBuilder()
+                .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+                .build()
+
+            val request: Request = original.newBuilder()
+                .url(url)
+                .build()
+            chain.proceed(request)
+        }
 
 }

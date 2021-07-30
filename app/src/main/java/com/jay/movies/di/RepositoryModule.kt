@@ -14,7 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @InstallIn(SingletonComponent::class)
 @Module
-class RepositoryModule {
+object RepositoryModule {
 
     @Provides
     @Reusable
