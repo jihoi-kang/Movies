@@ -9,7 +9,9 @@ import com.jay.movies.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    R.layout.activity_main,
+) {
     private val TAG = this::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {

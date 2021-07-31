@@ -1,8 +1,8 @@
 package com.jay.movies.api
 
-import com.jay.movies.api.response.GenreResponse
-import com.jay.movies.api.response.MovieResponse
-import com.jay.movies.api.response.VideoResponse
+import com.jay.movies.api.response.GetGenresResponse
+import com.jay.movies.api.response.GetMoviesResponse
+import com.jay.movies.api.response.GetVideosResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,18 +12,18 @@ import java.util.*
 interface MovieService {
 
     @GET("/3/discover/movie")
-    suspend fun fetchMovies(
+    suspend fun getMovies(
         @Query("sort_by") sortBy: String,
         @Query("page") page: Int,
         @Query("release_date.lte") today: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
-    ): MovieResponse
+    ): GetMoviesResponse
 
     @GET("/3/genre/movie/list")
-    suspend fun fetchMovieGenres(): GenreResponse
+    suspend fun getMovieGenres(): GetGenresResponse
 
     @GET("/3/movie/{movie_id}/videos")
-    suspend fun fetchMovieVideos(
+    suspend fun getMovieVideos(
         @Path("movie_id") id: Int,
-    ): VideoResponse
+    ): GetVideosResponse
 
 }

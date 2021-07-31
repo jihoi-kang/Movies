@@ -31,11 +31,11 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
         super.onViewCreated(view, savedInstanceState)
         viewModel.getMovieTrailer(args.movie.id)
 
-        setupView()
+        setupUi()
         setupObserve()
     }
 
-    private fun setupView() {
+    private fun setupUi() {
         binding.setVariable(BR.item, args.movie)
         binding.rvVideo.adapter = videoAdapter
         binding.toolbar.run {

@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.model.Genre" />
+            type="com.jay.movies.api.response.Genre" />
 
     </data>
 

@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             bind:isRefreshing="@{movieVm.isRefreshing ?? false}"
-            bind:onRefresh="@{() -> movieVm.refresh()}">
+            bind:refresh="@{() -> movieVm.refresh()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movie"

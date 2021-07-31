@@ -4,19 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.jay.movies.api.response.Genre
+import com.jay.movies.api.response.Movie
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.data.movie.MovieRepository
 import com.jay.movies.model.Filter
-import com.jay.movies.model.Genre
-import com.jay.movies.model.Movie
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
@@ -47,34 +45,34 @@ class MovieViewModel @Inject constructor(
 
     init {
         _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
-        fetchGenres()
+        getGenres()
     }
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-            fetchMovies()
+            getMovies()
         }
     }
 
     fun refresh() {
-        fetchMovies()
+        getMovies()
     }
 
-    private fun fetchGenres() {
+    private fun getGenres() {
         viewModelScope.launch {
-            _genreItems.value = movieRepository.fetchGenres()
-            fetchMovies()
+            _genreItems.value = movieRepository.getGenres()
+            getMovies()
         }
     }
 
-    private fun fetchMovies() {
+    private fun getMovies() {
         if (isRequestInProgress) return
         val sortByName = currentFilter.value?.sortByName ?: return
 
         viewModelScope.launch {
             isRequestInProgress = true
             _movieItems.postValue(
-                movieRepository.fetchMovies(
+                movieRepository.getMovies(
                     sortByName,
                     lastRequestedPage++
                 )
@@ -91,7 +89,7 @@ class MovieViewModel @Inject constructor(
         _currentFilter.value = filter
         movieRepository.clearCachedMovies()
         lastRequestedPage = STARTING_PAGE_INDEX
-        fetchMovies()
+        getMovies()
     }
 
     fun openMovieDetail(movie: Movie) {

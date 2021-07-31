@@ -1,15 +1,15 @@
 package com.jay.movies.data.movie
 
-import com.jay.movies.model.Genre
-import com.jay.movies.model.Movie
-import com.jay.movies.model.Video
+import com.jay.movies.api.response.Genre
+import com.jay.movies.api.response.Movie
+import com.jay.movies.api.response.Video
 
 interface MovieRemoteDataSource {
 
-    suspend fun fetchMovies(sortBy: String, page: Int): List<Movie>
+    suspend fun getMovies(sortBy: String, page: Int): List<Movie>
 
-    suspend fun fetchTrailers(movieId: Int): List<Video>
+    suspend fun getTrailers(movieId: Int): List<Video>
 
-    suspend fun fetchGenres(): List<Genre>
+    suspend fun getGenres(): List<Genre>
 
 }

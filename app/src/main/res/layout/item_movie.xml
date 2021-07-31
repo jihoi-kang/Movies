@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.model.Movie" />
+            type="com.jay.movies.api.response.Movie" />
 
         <variable
             name="viewModel"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:moviePostImage="@{item.poster_path}"
+            bind:moviePostImage="@{item.posterPath}"
             tools:src="@drawable/ic_error_outline_grey" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_small"
             android:layout_marginTop="@dimen/space_small"
-            android:text="@{item.release_date}"
+            android:text="@{item.releaseDate}"
             android:textColor="@color/movie_release_date"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_xx_small"
-                android:text="@{String.valueOf(item.vote_average)}"
+                android:text="@{String.valueOf(item.voteAverage)}"
                 tools:text="7.4" />
 
         </LinearLayout>
@@ -100,13 +100,13 @@
             android:layout_marginStart="@dimen/space_small"
             android:layout_marginTop="@dimen/space_small"
             android:orientation="horizontal"
-            bind:allGenres="@{viewModel.genreItems}"
-            bind:genreIds="@{item.genre_ids}"
             app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
             app:layout_constraintTop_toBottomOf="@id/ll_star"
+            bind:allGenres="@{viewModel.genreItems}"
+            bind:genreIds="@{item.genreIds}"
             tools:listitem="@layout/item_movie_genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

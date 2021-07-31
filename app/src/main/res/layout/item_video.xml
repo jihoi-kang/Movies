@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.model.Video" />
+            type="com.jay.movies.api.response.Video" />
 
         <variable
             name="viewModel"

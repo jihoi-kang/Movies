@@ -10,7 +10,6 @@ import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -18,14 +17,12 @@ object RepositoryModule {
 
     @Provides
     @Reusable
-    @ExperimentalCoroutinesApi
     fun provideMovieRepository(
         movieRemoteDataSource: MovieRemoteDataSource,
     ): MovieRepository = MovieRepositoryImpl(movieRemoteDataSource)
 
     @Provides
     @Reusable
-    @ExperimentalCoroutinesApi
     fun provideMovieRemoteDataSource(
         movieService: MovieService,
     ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(movieService)

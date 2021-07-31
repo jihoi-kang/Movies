@@ -8,6 +8,7 @@ fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
     this.isRefreshing = isRefreshing
 }
 
-@BindingAdapter("onRefresh")
-fun SwipeRefreshLayout.bindRefreshListener(onRefreshListener: SwipeRefreshLayout.OnRefreshListener) =
-    setOnRefreshListener(onRefreshListener)
+@BindingAdapter("refresh")
+fun SwipeRefreshLayout.bindRefreshListener(
+    onRefreshListener: SwipeRefreshLayout.OnRefreshListener,
+) = setOnRefreshListener(onRefreshListener)

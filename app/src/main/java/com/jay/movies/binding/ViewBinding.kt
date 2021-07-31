@@ -10,17 +10,15 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.florent37.glidepalette.BitmapPalette
-import com.github.florent37.glidepalette.GlidePalette
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.jay.movies.R
 import com.jay.movies.api.Api
 import com.jay.movies.api.Api.getBackdropPath
-import com.jay.movies.model.Genre
-import com.jay.movies.model.Movie
-import com.jay.movies.model.Video
+import com.jay.movies.api.response.Genre
+import com.jay.movies.api.response.Movie
+import com.jay.movies.api.response.Video
 import com.jay.movies.ui.movie.GenreAdapter
 import com.jay.movies.ui.movie.MovieAdapter
 import com.jay.movies.ui.movie.detail.VideoAdapter
@@ -46,10 +44,6 @@ fun ImageView.bindBackDropImage(backDropPath: String?) {
 fun ImageView.bindVideoThumbnailImage(key: String) {
     Glide.with(context)
         .load(Api.getYoutubeThumbnailPath(key))
-        .listener(GlidePalette.with(Api.getYoutubeThumbnailPath(key))
-            .use(BitmapPalette.Profile.VIBRANT)
-            .intoBackground(this)
-            .crossfade(true))
         .into(this)
 }
 

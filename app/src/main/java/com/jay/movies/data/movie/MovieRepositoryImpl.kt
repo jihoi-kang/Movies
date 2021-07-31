@@ -1,19 +1,17 @@
 package com.jay.movies.data.movie
 
-import com.jay.movies.model.Genre
-import com.jay.movies.model.Movie
-import com.jay.movies.model.Video
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.jay.movies.api.response.Genre
+import com.jay.movies.api.response.Movie
+import com.jay.movies.api.response.Video
 
-@ExperimentalCoroutinesApi
 class MovieRepositoryImpl(
     private val movieRemoteDataSource: MovieRemoteDataSource,
 ) : MovieRepository {
 
     private val inMemoryCacheMovies = mutableListOf<Movie>()
 
-    override suspend fun fetchMovies(sortBy: String, page: Int): List<Movie> {
-        val movies = movieRemoteDataSource.fetchMovies(sortBy, page)
+    override suspend fun getMovies(sortBy: String, page: Int): List<Movie> {
+        val movies = movieRemoteDataSource.getMovies(sortBy, page)
         inMemoryCacheMovies.addAll(movies.filter {
             !inMemoryCacheMovies.contains(it)
         })
@@ -25,10 +23,10 @@ class MovieRepositoryImpl(
         inMemoryCacheMovies.clear()
     }
 
-    override suspend fun fetchTrailers(movieId: Int): List<Video> =
-        movieRemoteDataSource.fetchTrailers(movieId)
+    override suspend fun getTrailers(movieId: Int): List<Video> =
+        movieRemoteDataSource.getTrailers(movieId)
 
-    override suspend fun fetchGenres(): List<Genre> =
-        movieRemoteDataSource.fetchGenres()
+    override suspend fun getGenres(): List<Genre> =
+        movieRemoteDataSource.getGenres()
 
 }

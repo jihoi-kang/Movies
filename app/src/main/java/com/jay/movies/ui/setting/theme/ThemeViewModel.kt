@@ -2,7 +2,6 @@ package com.jay.movies.ui.setting.theme
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
