@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jay.movies.BR
 import com.jay.movies.R
-import com.jay.movies.api.Api
+import com.jay.movies.data.remote.api.Api
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieDetailBinding
 import com.jay.movies.util.eventObserve

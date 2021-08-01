@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.jay.movies.api.response.Movie
-import com.jay.movies.api.response.Video
+import com.jay.movies.data.remote.api.response.Movie
+import com.jay.movies.data.remote.api.response.Video
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
-import com.jay.movies.data.movie.MovieRepository
+import com.jay.movies.data.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

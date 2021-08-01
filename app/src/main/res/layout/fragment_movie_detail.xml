@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.api.response.Movie" />
+            type="com.jay.movies.data.remote.api.response.Movie" />
 
         <variable
             name="vm"

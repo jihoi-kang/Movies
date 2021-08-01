@@ -2,7 +2,7 @@ package com.jay.movies.ui.movie.detail
 
 import androidx.recyclerview.widget.DiffUtil
 import com.jay.movies.R
-import com.jay.movies.api.response.Video
+import com.jay.movies.data.remote.api.response.Video
 import com.jay.movies.common.DataBindingAdapter
 
 class VideoAdapter(

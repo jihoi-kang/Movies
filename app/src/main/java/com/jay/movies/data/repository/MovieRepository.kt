@@ -1,8 +1,8 @@
-package com.jay.movies.data.movie
+package com.jay.movies.data.repository
 
-import com.jay.movies.api.response.Genre
-import com.jay.movies.api.response.Movie
-import com.jay.movies.api.response.Video
+import com.jay.movies.data.remote.api.response.Genre
+import com.jay.movies.data.remote.api.response.Movie
+import com.jay.movies.data.remote.api.response.Video
 
 interface MovieRepository {
 

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.jay.movies.MovieApplication
+import com.jay.movies.MoviesApplication
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
@@ -27,7 +27,7 @@ class ThemeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(dispatchers.io()) {
-            val theme = preferences.getInt(MovieApplication.CURRENT_THEME,
+            val theme = preferences.getInt(MoviesApplication.CURRENT_THEME,
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             _themeClickEvent.postValue(Event(theme))
         }

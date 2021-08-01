@@ -1,10 +1,10 @@
 package com.jay.movies.di
 
-import com.jay.movies.api.MovieService
-import com.jay.movies.data.movie.MovieRemoteDataSource
-import com.jay.movies.data.movie.MovieRemoteDataSourceImpl
-import com.jay.movies.data.movie.MovieRepository
-import com.jay.movies.data.movie.MovieRepositoryImpl
+import com.jay.movies.data.remote.api.MovieService
+import com.jay.movies.data.remote.MovieRemoteDataSource
+import com.jay.movies.data.remote.MovieRemoteDataSourceImpl
+import com.jay.movies.data.repository.MovieRepository
+import com.jay.movies.data.repository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable

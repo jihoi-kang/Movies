@@ -1,9 +1,9 @@
-package com.jay.movies.data.movie
+package com.jay.movies.data.remote
 
-import com.jay.movies.api.MovieService
-import com.jay.movies.api.response.Genre
-import com.jay.movies.api.response.Movie
-import com.jay.movies.api.response.Video
+import com.jay.movies.data.remote.api.MovieService
+import com.jay.movies.data.remote.api.response.Genre
+import com.jay.movies.data.remote.api.response.Movie
+import com.jay.movies.data.remote.api.response.Video
 
 class MovieRemoteDataSourceImpl(
     private val movieService: MovieService,

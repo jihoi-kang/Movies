@@ -1,8 +1,7 @@
 package com.jay.movies.di
 
 import com.jay.movies.BuildConfig
-import com.jay.movies.api.Api.BASE_TMDB_API_PATH
-import com.jay.movies.api.MovieService
+import com.jay.movies.data.remote.api.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -19,6 +18,8 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
+
+    private const val BASE_TMDB_API_PATH = "https://api.themoviedb.org"
 
     @Provides
     @Reusable

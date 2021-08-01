@@ -1,8 +1,8 @@
-package com.jay.movies.api
+package com.jay.movies.data.remote.api
 
-import com.jay.movies.api.response.GetGenresResponse
-import com.jay.movies.api.response.GetMoviesResponse
-import com.jay.movies.api.response.GetVideosResponse
+import com.jay.movies.data.remote.api.response.GetGenresResponse
+import com.jay.movies.data.remote.api.response.GetMoviesResponse
+import com.jay.movies.data.remote.api.response.GetVideosResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package com.jay.movies.api.response
+package com.jay.movies.data.remote.api.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

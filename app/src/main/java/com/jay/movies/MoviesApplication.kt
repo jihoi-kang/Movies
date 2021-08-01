@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @HiltAndroidApp
-class MovieApplication : Application() {
+class MoviesApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

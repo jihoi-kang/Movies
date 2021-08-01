@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.jay.movies.api.response.Genre
-import com.jay.movies.api.response.Movie
+import com.jay.movies.data.remote.api.response.Genre
+import com.jay.movies.data.remote.api.response.Movie
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
-import com.jay.movies.data.movie.MovieRepository
+import com.jay.movies.data.repository.MovieRepository
 import com.jay.movies.model.Filter
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
