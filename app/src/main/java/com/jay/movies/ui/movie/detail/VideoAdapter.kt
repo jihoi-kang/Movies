@@ -2,24 +2,24 @@ package com.jay.movies.ui.movie.detail
 
 import androidx.recyclerview.widget.DiffUtil
 import com.jay.movies.R
-import com.jay.movies.data.remote.api.response.Video
 import com.jay.movies.common.DataBindingAdapter
+import com.jay.movies.model.UiVideoModel
 
 class VideoAdapter(
     viewModel: MovieDetailViewModel,
-) : DataBindingAdapter<Video>(
+) : DataBindingAdapter<UiVideoModel>(
     DiffCallback(), viewModel
 ) {
 
-    class DiffCallback : DiffUtil.ItemCallback<Video>() {
+    class DiffCallback : DiffUtil.ItemCallback<UiVideoModel>() {
         override fun areItemsTheSame(
-            oldItem: Video,
-            newItem: Video,
+            oldItem: UiVideoModel,
+            newItem: UiVideoModel,
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: Video,
-            newItem: Video,
+            oldItem: UiVideoModel,
+            newItem: UiVideoModel,
         ): Boolean = oldItem == newItem
     }
 

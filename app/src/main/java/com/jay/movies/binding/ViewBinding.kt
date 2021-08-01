@@ -1,6 +1,5 @@
 package com.jay.movies.binding
 
-import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
@@ -8,47 +7,19 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.jay.movies.R
-import com.jay.movies.data.remote.api.Api
-import com.jay.movies.data.remote.api.Api.getBackdropPath
-import com.jay.movies.data.remote.api.response.Genre
-import com.jay.movies.data.remote.api.response.Movie
-import com.jay.movies.data.remote.api.response.Video
+import com.jay.movies.model.UiGenreModel
+import com.jay.movies.model.UiMovieModel
+import com.jay.movies.model.UiVideoModel
 import com.jay.movies.ui.movie.GenreAdapter
 import com.jay.movies.ui.movie.MovieAdapter
 import com.jay.movies.ui.movie.detail.VideoAdapter
 
-@BindingAdapter("moviePostImage")
-fun ImageView.bindPosterImage(posterPath: String?) {
-    Glide.with(this)
-        .load(getBackdropPath(posterPath))
-        .apply(
-            RequestOptions()
-                .placeholder(R.drawable.ic_error_outline_grey)
-        ).into(this)
-}
-
-@BindingAdapter("movieBackDropImage")
-fun ImageView.bindBackDropImage(backDropPath: String?) {
-    Glide.with(this)
-        .load(getBackdropPath(backDropPath))
-        .into(this)
-}
-
-@BindingAdapter("videoThumbnailImage")
-fun ImageView.bindVideoThumbnailImage(key: String) {
-    Glide.with(context)
-        .load(Api.getYoutubeThumbnailPath(key))
-        .into(this)
-}
-
 @BindingAdapter("allGenres", "genreIds")
-fun RecyclerView.bindHome(allGenres: List<Genre>, genreIds: List<Int>?) {
+fun RecyclerView.bindHome(allGenres: List<UiGenreModel>, genreIds: List<Int>?) {
     if (genreIds?.isNotEmpty() == true) {
         isVisible = true
         FlexboxLayoutManager(context).apply {
@@ -57,10 +28,12 @@ fun RecyclerView.bindHome(allGenres: List<Genre>, genreIds: List<Int>?) {
         }.let {
             this.layoutManager = it
         }
-        val genres = mutableListOf<Genre>()
+        val genres = mutableListOf<UiGenreModel>()
         genreIds.forEach { id ->
             allGenres.forEach { genre ->
-                if (genre.id == id) genres.add(genre)
+                if (genre.id == id) {
+                    genres.add(genre)
+                }
             }
         }
 
@@ -98,11 +71,11 @@ fun RecyclerView.bindItems(items: List<Any>?) {
 
     when (val adapter = adapter) {
         is MovieAdapter -> {
-            adapter.submitList(items as List<Movie>)
+            adapter.submitList(items as List<UiMovieModel>)
             adapter.notifyDataSetChanged()
         }
         is VideoAdapter -> {
-            adapter.submitList(items as List<Video>)
+            adapter.submitList(items as List<UiVideoModel>)
             adapter.notifyDataSetChanged()
         }
     }

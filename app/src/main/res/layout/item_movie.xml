@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.data.remote.api.response.Movie" />
+            type="com.jay.movies.model.UiMovieModel" />
 
         <variable
             name="viewModel"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:moviePostImage="@{item.posterPath}"
+            bind:loadUrl="@{item.posterUrl}"
             tools:src="@drawable/ic_error_outline_grey" />
 
         <TextView

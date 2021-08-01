@@ -32,7 +32,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim">
             <argument
                 android:name="movie"
-                app:argType="com.jay.movies.data.remote.api.response.Movie"
+                app:argType="com.jay.movies.model.UiMovieModel"
                 app:nullable="false" />
         </action>
 
@@ -59,7 +59,7 @@
         tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie"
-            app:argType="com.jay.movies.data.remote.api.response.Movie"
+            app:argType="com.jay.movies.model.UiMovieModel"
             app:nullable="false" />
     </fragment>
 

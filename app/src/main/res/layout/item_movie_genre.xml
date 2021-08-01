@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.data.remote.api.response.Genre" />
+            type="com.jay.movies.model.UiGenreModel" />
 
     </data>
 

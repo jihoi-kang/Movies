@@ -1,21 +1,21 @@
 package com.jay.movies.data.remote
 
 import com.jay.movies.data.remote.api.MovieService
-import com.jay.movies.data.remote.api.response.Genre
-import com.jay.movies.data.remote.api.response.Movie
-import com.jay.movies.data.remote.api.response.Video
+import com.jay.movies.data.remote.api.response.GetGenresResponse
+import com.jay.movies.data.remote.api.response.GetMoviesResponse
+import com.jay.movies.data.remote.api.response.GetVideosResponse
 
 class MovieRemoteDataSourceImpl(
     private val movieService: MovieService,
 ) : MovieRemoteDataSource {
 
-    override suspend fun getMovies(sortBy: String, page: Int): List<Movie> =
+    override suspend fun getMovies(sortBy: String, page: Int): List<GetMoviesResponse.Movie> =
         movieService.getMovies(sortBy, page).movies
 
-    override suspend fun getTrailers(movieId: Int): List<Video> =
+    override suspend fun getTrailers(movieId: Int): List<GetVideosResponse.Video> =
         movieService.getMovieVideos(movieId).videos
 
-    override suspend fun getGenres(): List<Genre> =
+    override suspend fun getGenres(): List<GetGenresResponse.Genre> =
         movieService.getMovieGenres().genres
 
 }

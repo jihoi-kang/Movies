@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jay.movies.BR
 import com.jay.movies.R
-import com.jay.movies.data.remote.api.Api
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieDetailBinding
 import com.jay.movies.util.eventObserve
@@ -63,8 +62,8 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
                 type = "text/plain"
             })
         }
-        viewModel.videoItemEvent.eventObserve(viewLifecycleOwner) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Api.getYoutubeVideoPath(it))))
+        viewModel.showVideo.eventObserve(viewLifecycleOwner) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
         }
     }
 

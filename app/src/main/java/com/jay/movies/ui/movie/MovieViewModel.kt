@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.jay.movies.data.remote.api.response.Genre
-import com.jay.movies.data.remote.api.response.Movie
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.data.repository.MovieRepository
 import com.jay.movies.model.Filter
+import com.jay.movies.model.UiGenreModel
+import com.jay.movies.model.UiMovieModel
+import com.jay.movies.model.asUiModel
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,11 +27,11 @@ class MovieViewModel @Inject constructor(
 
     val isRefreshing: LiveData<Boolean> get() = movieItems.map { false }
 
-    private val _movieItems = MutableLiveData<List<Movie>>(emptyList())
-    val movieItems: LiveData<List<Movie>> get() = _movieItems
+    private val _movieItems = MutableLiveData<List<UiMovieModel>>(emptyList())
+    val movieItems: LiveData<List<UiMovieModel>> get() = _movieItems
 
-    private val _genreItems = MutableLiveData<List<Genre>>()
-    val genreItems: LiveData<List<Genre>> get() = _genreItems
+    private val _genreItems = MutableLiveData<List<UiGenreModel>>()
+    val genreItems: LiveData<List<UiGenreModel>> get() = _genreItems
 
     private val _openFilter = MutableLiveData<Event<Unit>>()
     val openFilter: LiveData<Event<Unit>> get() = _openFilter
@@ -38,8 +39,8 @@ class MovieViewModel @Inject constructor(
     private val _currentFilter = MutableLiveData<Filter>()
     val currentFilter: LiveData<Filter> get() = _currentFilter
 
-    private val _openMovieEvent = MutableLiveData<Event<Movie>>()
-    val openMovieEvent: LiveData<Event<Movie>> get() = _openMovieEvent
+    private val _openMovieEvent = MutableLiveData<Event<UiMovieModel>>()
+    val openMovieEvent: LiveData<Event<UiMovieModel>> get() = _openMovieEvent
 
     private var isRequestInProgress = false
 
@@ -60,7 +61,9 @@ class MovieViewModel @Inject constructor(
 
     private fun getGenres() {
         viewModelScope.launch {
-            _genreItems.value = movieRepository.getGenres()
+            _genreItems.value = movieRepository.getGenres().map {
+                it.asUiModel()
+            }
             getMovies()
         }
     }
@@ -75,7 +78,7 @@ class MovieViewModel @Inject constructor(
                 movieRepository.getMovies(
                     sortByName,
                     lastRequestedPage++
-                )
+                ).map { it.asUiModel() }
             )
             isRequestInProgress = false
         }
@@ -92,7 +95,7 @@ class MovieViewModel @Inject constructor(
         getMovies()
     }
 
-    fun openMovieDetail(movie: Movie) {
+    fun openMovieDetail(movie: UiMovieModel) {
         _openMovieEvent.value = Event(movie)
     }
 

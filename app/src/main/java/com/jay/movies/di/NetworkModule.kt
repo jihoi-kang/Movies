@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 @Module
 object NetworkModule {
 
-    private const val BASE_TMDB_API_PATH = "https://api.themoviedb.org"
+    private const val BASE_TMDB_URL = "https://api.themoviedb.org"
 
     @Provides
     @Reusable
@@ -32,7 +32,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_TMDB_API_PATH)
+            .baseUrl(BASE_TMDB_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

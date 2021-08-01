@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.jay.movies.data.remote.api.response.Video" />
+            type="com.jay.movies.model.UiVideoModel" />
 
         <variable
             name="viewModel"
@@ -20,7 +20,7 @@
         android:layout_height="@dimen/youtube_thumbnail_height"
         android:layout_margin="@dimen/space_xx_small"
         android:foreground="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onVideoItemClick(item.key)}"
+        android:onClick="@{() -> viewModel.onVideoItemClick(item.videoUrl)}"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
 
@@ -36,7 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:videoThumbnailImage="@{item.key}" />
+                bind:loadUrl="@{item.thumbnailUrl}" />
 
             <ImageView
                 android:layout_width="wrap_content"
