@@ -15,6 +15,8 @@ import dagger.hilt.components.SingletonComponent
 @Module
 object AppModule {
 
+    private const val NAME = "Movies"
+
     @Provides
     @Reusable
     fun provideDispatchers(): DispatcherProvider = DefaultDispatcherProvider()
@@ -22,9 +24,6 @@ object AppModule {
     @Provides
     @Reusable
     fun providePreference(@ApplicationContext context: Context): SharedPreferences =
-        context.getSharedPreferences(
-            "",
-            Context.MODE_PRIVATE
-        )
+        context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
 
 }

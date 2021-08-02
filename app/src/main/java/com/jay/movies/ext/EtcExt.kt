@@ -1,4 +1,4 @@
-package com.jay.movies.binding
+package com.jay.movies.ext
 
 import android.widget.RadioGroup
 import android.widget.TextView

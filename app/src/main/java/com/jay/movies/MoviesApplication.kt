@@ -1,15 +1,17 @@
 package com.jay.movies
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @HiltAndroidApp
 class MoviesApplication : Application() {
+
+    @Inject
+    lateinit var preference: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -18,11 +20,8 @@ class MoviesApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val theme = getSharedPreferences("", MODE_PRIVATE)
-                .getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            AppCompatDelegate.setDefaultNightMode(theme)
-        }
+        val theme = preference.getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        AppCompatDelegate.setDefaultNightMode(theme)
     }
 
     companion object {
