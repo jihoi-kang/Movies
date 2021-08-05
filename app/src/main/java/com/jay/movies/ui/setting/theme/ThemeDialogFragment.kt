@@ -2,6 +2,7 @@ package com.jay.movies.ui.setting.theme
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
 import com.jay.movies.R
 import com.jay.movies.base.BaseDialogFragment
@@ -32,8 +33,18 @@ class ThemeDialogFragment : BaseDialogFragment<ThemeViewModel, DialogThemeBindin
     private fun setupObserve() {
         viewModel.closeEvent.eventObserve(this) { dismiss() }
         viewModel.themeClickEvent.eventObserve(this) {
+            checkAppearance(it)
             systemVm.onChangedTheme(it)
         }
+    }
+
+    private fun checkAppearance(mode: Int) {
+        binding.rgRadio.check(when (mode) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> R.id.rb_use_device
+            AppCompatDelegate.MODE_NIGHT_NO -> R.id.rb_light
+            AppCompatDelegate.MODE_NIGHT_YES -> R.id.rb_dark
+            else -> -1
+        })
     }
 
 }

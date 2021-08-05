@@ -9,7 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.jay.movies.MoviesApplication
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.base.DispatcherProvider
-import com.jay.movies.common.Event
+import com.jay.movies.model.enums.Appearance
+import com.jay.movies.model.enums.getAppearance
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,21 +21,21 @@ class SystemViewModel @Inject constructor(
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {
 
-    private val _currentTheme = MutableLiveData<Event<Int>>()
-    val currentTheme: LiveData<Event<Int>> get() = _currentTheme
+    private val _currentTheme = MutableLiveData(Appearance.SYSTEM)
+    val currentTheme: LiveData<Appearance> get() = _currentTheme
 
     init {
         viewModelScope.launch(dispatchers.io()) {
-            val theme = preferences.getInt(MoviesApplication.CURRENT_THEME,
+            val mode = preferences.getInt(MoviesApplication.CURRENT_THEME,
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            _currentTheme.postValue(Event(theme))
+            _currentTheme.postValue(getAppearance(mode))
         }
     }
 
-    fun onChangedTheme(theme: Int) {
-        _currentTheme.value = Event(theme)
-        preferences.edit { putInt(MoviesApplication.CURRENT_THEME, theme) }
-        AppCompatDelegate.setDefaultNightMode(theme)
+    fun onChangedTheme(mode: Int) {
+        _currentTheme.value = getAppearance(mode)
+        preferences.edit { putInt(MoviesApplication.CURRENT_THEME, mode) }
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
 }
