@@ -13,6 +13,7 @@ import com.jay.movies.model.UiMovieModel
 import com.jay.movies.model.asUiModel
 import com.jay.movies.ui.movie.filter.MovieFilterFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +21,6 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
-
     private val TAG = this::class.java.simpleName
 
     private var lastRequestedPage = STARTING_PAGE_INDEX
@@ -30,8 +30,7 @@ class MovieViewModel @Inject constructor(
     private val _movieItems = MutableLiveData<List<UiMovieModel>>(emptyList())
     val movieItems: LiveData<List<UiMovieModel>> get() = _movieItems
 
-    private val _genreItems = MutableLiveData<List<UiGenreModel>>()
-    val genreItems: LiveData<List<UiGenreModel>> get() = _genreItems
+    private lateinit var genreItems: List<UiGenreModel>
 
     private val _openFilter = MutableLiveData<Event<Unit>>()
     val openFilter: LiveData<Event<Unit>> get() = _openFilter
@@ -45,8 +44,17 @@ class MovieViewModel @Inject constructor(
     private var isRequestInProgress = false
 
     init {
-        _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
-        getGenres()
+        viewModelScope.launch {
+            _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
+            val deferred = async {
+                genreItems = movieRepository.getGenres().map {
+                    it.asUiModel()
+                }
+            }
+
+            deferred.await()
+            getMovies()
+        }
     }
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
@@ -59,15 +67,6 @@ class MovieViewModel @Inject constructor(
         getMovies()
     }
 
-    private fun getGenres() {
-        viewModelScope.launch {
-            _genreItems.value = movieRepository.getGenres().map {
-                it.asUiModel()
-            }
-            getMovies()
-        }
-    }
-
     private fun getMovies() {
         if (isRequestInProgress) return
         val sortByName = currentFilter.value?.sortByName ?: return
@@ -78,7 +77,7 @@ class MovieViewModel @Inject constructor(
                 movieRepository.getMovies(
                     sortByName,
                     lastRequestedPage++
-                ).map { it.asUiModel() }
+                ).map { it.asUiModel(genreItems) }
             )
             isRequestInProgress = false
         }

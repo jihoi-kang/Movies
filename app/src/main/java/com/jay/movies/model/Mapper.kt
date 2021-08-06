@@ -14,8 +14,8 @@ fun Genre.asUiModel(): UiGenreModel =
         this.name,
     )
 
-fun Movie.asUiModel(): UiMovieModel =
-    UiMovieModel(
+fun Movie.asUiModel(genres: List<UiGenreModel>): UiMovieModel {
+    return UiMovieModel(
         this.id,
         "$BASE_IMAGE_URL${this.posterPath}",
         "$BASE_IMAGE_URL${this.backdropPath}",
@@ -25,6 +25,7 @@ fun Movie.asUiModel(): UiMovieModel =
         this.releaseDate,
         this.voteAverage,
     )
+}
 
 fun Video.asUiModel(): UiVideoModel =
     UiVideoModel(

@@ -61,6 +61,10 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
             val action = MovieFragmentDirections.actionMovieToMovieDetail(movie)
             findNavController().navigate(action)
         }
+        movieViewModel.movieItems.observe(viewLifecycleOwner, {
+            movieAdapter.submitList(it)
+            movieAdapter.notifyDataSetChanged()
+        })
     }
 
 }

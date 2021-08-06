@@ -65,6 +65,10 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
         viewModel.showVideo.eventObserve(viewLifecycleOwner) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
         }
+        viewModel.trailerVideoItems.observe(viewLifecycleOwner, {
+            videoAdapter.submitList(it)
+            videoAdapter.notifyDataSetChanged()
+        })
     }
 
 }

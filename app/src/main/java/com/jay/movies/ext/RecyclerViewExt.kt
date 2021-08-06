@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.jay.movies.common.DataBindingAdapter
 import com.jay.movies.model.UiGenreModel
 import com.jay.movies.model.UiMovieModel
 import com.jay.movies.model.UiVideoModel
@@ -35,25 +36,9 @@ fun RecyclerView.bindHome(allGenres: List<UiGenreModel>, genreIds: List<Int>?) {
 
         this.adapter = GenreAdapter()
         (this.adapter as GenreAdapter).run {
-            submitList(genres)
+//            submitList(genres)
         }
     } else {
         isGone = true
-    }
-}
-
-@BindingAdapter("items")
-fun RecyclerView.bindItems(items: List<Any>?) {
-    items ?: return
-
-    when (val adapter = adapter) {
-        is MovieAdapter -> {
-            adapter.submitList(items as List<UiMovieModel>)
-            adapter.notifyDataSetChanged()
-        }
-        is VideoAdapter -> {
-            adapter.submitList(items as List<UiVideoModel>)
-            adapter.notifyDataSetChanged()
-        }
     }
 }

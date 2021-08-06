@@ -111,7 +111,6 @@
                         android:layout_marginTop="@dimen/space_small"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        bind:items="@{vm.trailerVideoItems}"
                         tools:listitem="@layout/item_video" />
 
                     <androidx.appcompat.widget.AppCompatTextView
