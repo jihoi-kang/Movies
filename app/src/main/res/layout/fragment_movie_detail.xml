@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="com.jay.movies.model.UiVideoModel" />
+
         <variable
             name="item"
             type="com.jay.movies.model.UiMovieModel" />
@@ -111,6 +113,10 @@
                         android:layout_marginTop="@dimen/space_small"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        bind:diffCallback="@{(Object)UiVideoModel.Companion}"
+                        bind:itemLayout="@{@layout/item_video}"
+                        bind:items="@{vm.trailerVideoItems}"
+                        bind:viewModel="@{vm}"
                         tools:listitem="@layout/item_video" />
 
                     <androidx.appcompat.widget.AppCompatTextView

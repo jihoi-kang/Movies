@@ -22,10 +22,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 
     private val args: MovieDetailFragmentArgs by navArgs()
 
-    private val videoAdapter: VideoAdapter by lazy {
-        VideoAdapter(viewModel)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getMovieTrailer(args.movie.id)
@@ -36,7 +32,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 
     private fun setupUi() {
         binding.setVariable(BR.item, args.movie)
-        binding.rvVideo.adapter = videoAdapter
         binding.toolbar.run {
             setNavigationOnClickListener {
                 findNavController().navigateUp()
@@ -65,10 +60,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
         viewModel.showVideo.eventObserve(viewLifecycleOwner) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
         }
-        viewModel.trailerVideoItems.observe(viewLifecycleOwner, {
-            videoAdapter.submitList(it)
-            videoAdapter.notifyDataSetChanged()
-        })
     }
 
 }

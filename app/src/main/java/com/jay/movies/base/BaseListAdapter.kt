@@ -9,13 +9,14 @@ open class BaseListAdapter(
     @LayoutRes private val layoutResId: Int,
     diffCallback: DiffUtil.ItemCallback<Any>,
 ) : ListAdapter<Any, BaseViewHolder>(diffCallback) {
+    var viewModel: BaseViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return BaseViewHolder(layoutResId = layoutResId, parent = parent)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position), viewModel)
     }
 
 }

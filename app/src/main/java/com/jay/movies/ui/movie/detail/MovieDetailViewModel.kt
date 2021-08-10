@@ -2,8 +2,7 @@ package com.jay.movies.ui.movie.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.data.repository.MovieRepository
@@ -11,6 +10,7 @@ import com.jay.movies.model.UiMovieModel
 import com.jay.movies.model.UiVideoModel
 import com.jay.movies.model.asUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,17 +18,8 @@ class MovieDetailViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
-    private val movieIdLiveData: MutableLiveData<Int> = MutableLiveData()
-
-    val trailerVideoItems: LiveData<List<UiVideoModel>> =
-        movieIdLiveData.switchMap { movieId ->
-            liveData {
-                val videoItems = movieRepository.getTrailers(movieId).map {
-                    it.asUiModel()
-                }
-                emit(videoItems)
-            }
-        }
+    private val _trailerVideoItems = MutableLiveData<List<UiVideoModel>>(emptyList())
+    val trailerVideoItems: LiveData<List<UiVideoModel>> get() = _trailerVideoItems
 
     private val _shareEvent = MutableLiveData<Event<String>>()
     val shareEvent: LiveData<Event<String>> = _shareEvent
@@ -37,7 +28,13 @@ class MovieDetailViewModel @Inject constructor(
     val showVideo: LiveData<Event<String>> get() = _showVideo
 
     fun getMovieTrailer(movieId: Int) {
-        movieIdLiveData.value = movieId
+        viewModelScope.launch {
+            val videoItems = movieRepository.getTrailers(movieId).map {
+                it.asUiModel()
+            }
+
+            _trailerVideoItems.value = videoItems
+        }
     }
 
     fun onVideoItemClick(videoUrl: String) {

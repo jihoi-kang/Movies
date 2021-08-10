@@ -17,8 +17,9 @@ open class BaseViewHolder(
 ) {
     protected val binding: ViewDataBinding = DataBindingUtil.bind(itemView)!!
 
-    fun onBind(item: Any?) {
+    fun onBind(item: Any?, viewModel: BaseViewModel?) {
         binding.setVariable(BR.item, item)
+        viewModel?.let { binding.setVariable(BR.viewModel, it) }
         binding.executePendingBindings()
     }
 }
