@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="com.jay.movies.model.UiMovieModel" />
+
         <variable
             name="vm"
             type="com.jay.movies.ui.movie.MovieEmptyViewModel" />
@@ -47,6 +49,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:diffCallback="@{(Object)UiMovieModel.Companion}"
+                bind:itemLayout="@{@layout/item_movie}"
+                bind:items="@{movieVm.movieItems}"
+                bind:viewModel="@{movieVm}"
                 tools:listitem="@layout/item_movie" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

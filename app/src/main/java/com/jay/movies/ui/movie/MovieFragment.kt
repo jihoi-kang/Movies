@@ -21,8 +21,6 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
 ) {
     private val TAG = this::class.java.simpleName
 
-    private lateinit var movieAdapter: MovieAdapter
-
     val movieViewModel by activityViewModels<MovieViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +33,6 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
     }
 
     private fun setupView() {
-        movieAdapter = MovieAdapter(movieViewModel)
-        binding.rvMovie.adapter = movieAdapter
         binding.rvMovie.addOnScrollListener(object : OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -61,10 +57,6 @@ class MovieFragment : BaseFragment<MovieEmptyViewModel, FragmentMovieBinding>(
             val action = MovieFragmentDirections.actionMovieToMovieDetail(movie)
             findNavController().navigate(action)
         }
-        movieViewModel.movieItems.observe(viewLifecycleOwner, {
-            movieAdapter.submitList(it)
-            movieAdapter.notifyDataSetChanged()
-        })
     }
 
 }

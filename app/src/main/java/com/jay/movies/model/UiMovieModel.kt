@@ -1,6 +1,7 @@
 package com.jay.movies.model
 
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -13,4 +14,16 @@ data class UiMovieModel(
     val overview: String,
     val releaseDate: String,
     val voteAverage: Float,
-) : Parcelable
+) : Parcelable {
+
+    companion object : DiffUtil.ItemCallback<UiMovieModel>() {
+        override fun areItemsTheSame(oldItem: UiMovieModel, newItem: UiMovieModel): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: UiMovieModel, newItem: UiMovieModel): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+}
