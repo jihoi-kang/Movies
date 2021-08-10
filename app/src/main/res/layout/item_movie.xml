@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="com.jay.movies.model.UiGenreModel" />
+
         <variable
             name="item"
             type="com.jay.movies.model.UiMovieModel" />
@@ -105,8 +107,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_movie_post"
             app:layout_constraintTop_toBottomOf="@id/ll_star"
-            bind:allGenres="@{viewModel.genreItems}"
-            bind:genreIds="@{item.genreIds}"
+            bind:diffCallback="@{(Object)UiGenreModel.Companion}"
+            bind:itemLayout="@{@layout/item_movie_genre}"
+            bind:items="@{item.genres}"
             tools:listitem="@layout/item_movie_genre" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

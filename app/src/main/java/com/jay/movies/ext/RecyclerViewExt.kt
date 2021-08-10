@@ -1,44 +1,21 @@
 package com.jay.movies.ext
 
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
+import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.jay.movies.common.DataBindingAdapter
-import com.jay.movies.model.UiGenreModel
-import com.jay.movies.model.UiMovieModel
-import com.jay.movies.model.UiVideoModel
-import com.jay.movies.ui.movie.GenreAdapter
-import com.jay.movies.ui.movie.MovieAdapter
-import com.jay.movies.ui.movie.detail.VideoAdapter
+import com.jay.movies.base.BaseListAdapter
 
-@BindingAdapter("allGenres", "genreIds")
-fun RecyclerView.bindHome(allGenres: List<UiGenreModel>, genreIds: List<Int>?) {
-    if (genreIds?.isNotEmpty() == true) {
-        isVisible = true
-        FlexboxLayoutManager(context).apply {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-        }.let {
-            this.layoutManager = it
-        }
-        val genres = mutableListOf<UiGenreModel>()
-        genreIds.forEach { id ->
-            allGenres.forEach { genre ->
-                if (genre.id == id) {
-                    genres.add(genre)
-                }
-            }
+@BindingAdapter("items", "itemLayout", "diffCallback")
+fun RecyclerView.bindItems(
+    items: List<Any>,
+    @LayoutRes layoutResId: Int,
+    diffCallback: DiffUtil.ItemCallback<Any>,
+) {
+    val baseListAdapter = this.adapter as? BaseListAdapter
+        ?: BaseListAdapter(layoutResId, diffCallback).also {
+            this.adapter = it
         }
 
-        this.adapter = GenreAdapter()
-        (this.adapter as GenreAdapter).run {
-//            submitList(genres)
-        }
-    } else {
-        isGone = true
-    }
+    baseListAdapter.submitList(items)
 }

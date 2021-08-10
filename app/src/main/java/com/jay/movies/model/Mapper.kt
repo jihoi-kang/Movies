@@ -14,13 +14,17 @@ fun Genre.asUiModel(): UiGenreModel =
         this.name,
     )
 
-fun Movie.asUiModel(genres: List<UiGenreModel>): UiMovieModel {
+fun Movie.asUiModel(allGenres: List<UiGenreModel>): UiMovieModel {
+    val genres = allGenres.filter {
+        genreIds.contains(it.id)
+    }
+
     return UiMovieModel(
         this.id,
         "$BASE_IMAGE_URL${this.posterPath}",
         "$BASE_IMAGE_URL${this.backdropPath}",
         this.title,
-        this.genreIds,
+        genres,
         this.overview,
         this.releaseDate,
         this.voteAverage,
