@@ -104,6 +104,7 @@
                         android:text="@string/trailers"
                         android:textColor="@color/common_title"
                         android:textSize="18sp"
+                        bind:isVisible="@{vm.trailerVideoItems.size() != 0}"
                         tools:text="@string/trailers" />
 
                     <androidx.recyclerview.widget.RecyclerView
