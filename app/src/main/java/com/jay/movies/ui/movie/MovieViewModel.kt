@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.data.repository.MovieRepository
-import com.jay.movies.model.Filter
 import com.jay.movies.model.UiGenreModel
 import com.jay.movies.model.UiMovieModel
 import com.jay.movies.model.asUiModel
-import com.jay.movies.ui.movie.filter.MovieFilterFragment
+import com.jay.movies.model.enums.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -21,10 +20,6 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
-    private val TAG = this::class.java.simpleName
-
-    private var lastRequestedPage = STARTING_PAGE_INDEX
-
     val isRefreshing: LiveData<Boolean> get() = movieItems.map { false }
 
     private val _movieItems = MutableLiveData<List<UiMovieModel>>(emptyList())
@@ -35,17 +30,15 @@ class MovieViewModel @Inject constructor(
     private val _openFilter = MutableLiveData<Event<Unit>>()
     val openFilter: LiveData<Event<Unit>> get() = _openFilter
 
-    private val _currentFilter = MutableLiveData<Filter>()
-    val currentFilter: LiveData<Filter> get() = _currentFilter
-
     private val _openMovieEvent = MutableLiveData<Event<UiMovieModel>>()
     val openMovieEvent: LiveData<Event<UiMovieModel>> get() = _openMovieEvent
 
+    private var lastRequestedPage = STARTING_PAGE_INDEX
     private var isRequestInProgress = false
+    private var currentFilter: Filter = Filter.POPULARITY
 
     init {
         viewModelScope.launch {
-            _currentFilter.value = MovieFilterFragment.DEFAULT_FILTER
             val deferred = async {
                 genreItems = movieRepository.getGenres().map {
                     it.asUiModel()
@@ -64,18 +57,19 @@ class MovieViewModel @Inject constructor(
     }
 
     fun refresh() {
+        movieRepository.clearCachedMovies()
+        lastRequestedPage = STARTING_PAGE_INDEX
         getMovies()
     }
 
     private fun getMovies() {
         if (isRequestInProgress) return
-        val sortByName = currentFilter.value?.sortByName ?: return
 
         viewModelScope.launch {
             isRequestInProgress = true
             _movieItems.postValue(
                 movieRepository.getMovies(
-                    sortByName,
+                    currentFilter.sortBy,
                     lastRequestedPage++
                 ).map { it.asUiModel(genreItems) }
             )
@@ -87,15 +81,13 @@ class MovieViewModel @Inject constructor(
         _openFilter.value = Event(Unit)
     }
 
-    fun setupFilter(filter: Filter) {
-        _currentFilter.value = filter
-        movieRepository.clearCachedMovies()
-        lastRequestedPage = STARTING_PAGE_INDEX
-        getMovies()
-    }
-
     fun openMovieDetail(movie: UiMovieModel) {
         _openMovieEvent.value = Event(movie)
+    }
+
+    fun updateFilter(filter: Filter) {
+        currentFilter = filter
+        refresh()
     }
 
     companion object {

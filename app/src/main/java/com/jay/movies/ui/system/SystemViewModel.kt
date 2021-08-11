@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.jay.movies.MoviesApplication
 import com.jay.movies.base.BaseViewModel
-import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.model.enums.Appearance
 import com.jay.movies.model.enums.getAppearance
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SystemViewModel @Inject constructor(
-    dispatchers: DispatcherProvider,
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {
 
@@ -25,7 +23,7 @@ class SystemViewModel @Inject constructor(
     val currentTheme: LiveData<Appearance> get() = _currentTheme
 
     init {
-        viewModelScope.launch(dispatchers.io()) {
+        viewModelScope.launch {
             val mode = preferences.getInt(MoviesApplication.CURRENT_THEME,
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             _currentTheme.postValue(getAppearance(mode))

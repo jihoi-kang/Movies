@@ -10,10 +10,6 @@
 
         <variable
             name="vm"
-            type="com.jay.movies.ui.movie.MovieEmptyViewModel" />
-
-        <variable
-            name="movieVm"
             type="com.jay.movies.ui.movie.MovieViewModel" />
 
     </data>
@@ -41,8 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            bind:isRefreshing="@{movieVm.isRefreshing ?? false}"
-            bind:refresh="@{() -> movieVm.refresh()}">
+            bind:isRefreshing="@{vm.isRefreshing ?? false}"
+            bind:refresh="@{() -> vm.refresh()}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movie"
@@ -51,8 +47,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:diffCallback="@{(Object)UiMovieModel.Companion}"
                 bind:itemLayout="@{@layout/item_movie}"
-                bind:items="@{movieVm.movieItems}"
-                bind:viewModel="@{movieVm}"
+                bind:items="@{vm.movieItems}"
+                bind:viewModel="@{vm}"
                 tools:listitem="@layout/item_movie" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -64,7 +60,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/fab_filter_bottom_margin"
             android:layout_marginBottom="@dimen/fab_filter_bottom_margin"
-            android:onClick="@{() -> movieVm.openFilter()}"
+            android:onClick="@{() -> vm.openFilter()}"
             android:src="@drawable/ic_filter_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

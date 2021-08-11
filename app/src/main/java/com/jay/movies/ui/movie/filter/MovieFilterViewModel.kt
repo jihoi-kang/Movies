@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
-import com.jay.movies.model.Filter
+import com.jay.movies.model.enums.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

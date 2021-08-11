@@ -7,9 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
+import com.jay.movies.common.eventObserve
 import com.jay.movies.databinding.FragmentSettingBinding
 import com.jay.movies.ui.system.SystemViewModel
-import com.jay.movies.common.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,11 +24,11 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
+        setupUi()
         setupObserve()
     }
 
-    private fun setupView() {
+    private fun setupUi() {
         binding.setVariable(BR.systemVm, systemViewModel)
     }
 

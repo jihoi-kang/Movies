@@ -2,8 +2,6 @@ package com.jay.movies.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.jay.movies.base.DefaultDispatcherProvider
-import com.jay.movies.base.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -16,10 +14,6 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     private const val NAME = "Movies"
-
-    @Provides
-    @Reusable
-    fun provideDispatchers(): DispatcherProvider = DefaultDispatcherProvider()
 
     @Provides
     @Reusable

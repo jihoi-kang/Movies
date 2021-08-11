@@ -24,7 +24,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMovieTrailer(args.movie.id)
 
         setupUi()
         setupObserve()
@@ -32,19 +31,16 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 
     private fun setupUi() {
         binding.setVariable(BR.item, args.movie)
-        binding.toolbar.run {
-            setNavigationOnClickListener {
-                findNavController().navigateUp()
-            }
-            setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.menu_share -> {
-                        val movie = binding.item ?: return@setOnMenuItemClickListener false
-                        viewModel.onClickShare(movie)
-                        true
-                    }
-                    else -> false
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_share -> {
+                    viewModel.onClickShare()
+                    true
                 }
+                else -> false
             }
         }
     }

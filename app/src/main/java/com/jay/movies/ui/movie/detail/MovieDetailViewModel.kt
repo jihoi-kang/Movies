@@ -2,6 +2,7 @@ package com.jay.movies.ui.movie.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
@@ -15,8 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
+    state: SavedStateHandle,
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
+
+    private val movie: UiMovieModel = state.get<UiMovieModel>("movie")!!
 
     private val _trailerVideoItems = MutableLiveData<List<UiVideoModel>>(emptyList())
     val trailerVideoItems: LiveData<List<UiVideoModel>> get() = _trailerVideoItems
@@ -27,13 +31,11 @@ class MovieDetailViewModel @Inject constructor(
     private val _showVideo = MutableLiveData<Event<String>>()
     val showVideo: LiveData<Event<String>> get() = _showVideo
 
-    fun getMovieTrailer(movieId: Int) {
+    init {
         viewModelScope.launch {
-            val videoItems = movieRepository.getTrailers(movieId).map {
+            _trailerVideoItems.value = movieRepository.getTrailers(movie.id).map {
                 it.asUiModel()
             }
-
-            _trailerVideoItems.value = videoItems
         }
     }
 
@@ -41,7 +43,7 @@ class MovieDetailViewModel @Inject constructor(
         _showVideo.value = Event(videoUrl)
     }
 
-    fun onClickShare(movie: UiMovieModel) {
+    fun onClickShare() {
         val movieRecommendation = StringBuilder().apply {
             append("✋Movie Recommendation!✋\n")
             append("Title: ${movie.title}\n")

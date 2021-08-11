@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.jay.movies.MoviesApplication
 import com.jay.movies.base.BaseViewModel
-import com.jay.movies.base.DispatcherProvider
 import com.jay.movies.common.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ThemeViewModel @Inject constructor(
-    dispatchers: DispatcherProvider,
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {
 
@@ -26,7 +24,7 @@ class ThemeViewModel @Inject constructor(
     val themeClickEvent: LiveData<Event<Int>> get() = _themeClickEvent
 
     init {
-        viewModelScope.launch(dispatchers.io()) {
+        viewModelScope.launch {
             val theme = preferences.getInt(MoviesApplication.CURRENT_THEME,
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             _themeClickEvent.postValue(Event(theme))
