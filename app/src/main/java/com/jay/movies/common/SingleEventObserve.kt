@@ -1,10 +1,9 @@
-package com.jay.movies.util
+package com.jay.movies.common
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.jay.movies.common.Event
 
 @MainThread
 inline fun <T> LiveData<Event<T>>.eventObserve(

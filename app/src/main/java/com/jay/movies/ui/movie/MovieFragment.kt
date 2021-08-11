@@ -11,7 +11,7 @@ import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentMovieBinding
-import com.jay.movies.util.eventObserve
+import com.jay.movies.common.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

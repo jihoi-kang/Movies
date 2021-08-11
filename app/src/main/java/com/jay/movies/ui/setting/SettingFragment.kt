@@ -9,7 +9,7 @@ import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.databinding.FragmentSettingBinding
 import com.jay.movies.ui.system.SystemViewModel
-import com.jay.movies.util.eventObserve
+import com.jay.movies.common.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
