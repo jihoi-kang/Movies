@@ -5,8 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.common.eventObserve
@@ -20,8 +18,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
 ) {
     private val TAG = this::class.java.simpleName
 
-    private val args: MovieDetailFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -30,7 +26,6 @@ class MovieDetailFragment : BaseFragment<MovieDetailViewModel, FragmentMovieDeta
     }
 
     private fun setupUi() {
-        binding.setVariable(BR.item, args.movie)
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }

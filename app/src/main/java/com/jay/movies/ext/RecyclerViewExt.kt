@@ -20,9 +20,6 @@ fun RecyclerView.bindSetAdapter(
     diffCallback: DiffUtil.ItemCallback<Any>? = null,
     viewModel: BaseViewModel? = null,
 ) {
-    // required parameter check
-    items ?: error("items is null")
-    layoutResId ?: error("layoutResId is null")
     diffCallback ?: error("diffCallback is null")
 
     // set adapter

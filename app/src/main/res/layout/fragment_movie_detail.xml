@@ -9,10 +9,6 @@
         <import type="com.jay.movies.model.UiVideoModel" />
 
         <variable
-            name="item"
-            type="com.jay.movies.model.UiMovieModel" />
-
-        <variable
             name="vm"
             type="com.jay.movies.ui.movie.detail.MovieDetailViewModel" />
 
@@ -58,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    bind:loadUrl="@{item.backgroundUrl}" />
+                    bind:loadUrl="@{vm.movieItem.backgroundUrl}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -72,7 +68,7 @@
                         android:layout_marginTop="@dimen/space_large"
                         android:gravity="center"
                         android:lineSpacingExtra="6dp"
-                        android:text="@{item.title}"
+                        android:text="@{vm.movieItem.title}"
                         android:textColor="@color/common_title"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -83,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_small"
                         android:gravity="center"
-                        android:text="@{item.releaseDate}"
+                        android:text="@{vm.movieItem.releaseDate}"
                         android:textColor="@color/common_content"
                         android:textSize="14sp"
                         tools:text="2020-09-04" />
@@ -94,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/space_small"
-                        android:rating="@{item.voteAverage / 2}"
+                        android:rating="@{vm.movieItem.voteAverage / 2}"
                         tools:rating="2.5f" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -134,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_small"
                         android:lineSpacingExtra="6dp"
-                        android:text="@{item.overview}"
+                        android:text="@{vm.movieItem.overview}"
                         android:textColor="@color/common_content"
                         android:textSize="14sp" />
 
