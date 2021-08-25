@@ -2,29 +2,24 @@ package com.jay.movies.di
 
 import com.jay.movies.data.remote.MovieRemoteDataSource
 import com.jay.movies.data.remote.MovieRemoteDataSourceImpl
-import com.jay.movies.data.remote.api.MovieService
 import com.jay.movies.data.repository.MovieRepository
 import com.jay.movies.data.repository.MovieRepositoryImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-object RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
+    @Binds
     @Reusable
-    fun provideMovieRepository(
-        movieRemoteDataSource: MovieRemoteDataSource,
-    ): MovieRepository = MovieRepositoryImpl(movieRemoteDataSource)
+    abstract fun provideMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
-    @Provides
+    @Binds
     @Reusable
-    fun provideMovieRemoteDataSource(
-        movieService: MovieService,
-    ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(movieService)
+    abstract fun provideMovieRemoteDataSource(movieRemoteDataSourceImpl: MovieRemoteDataSourceImpl): MovieRemoteDataSource
 
 }

@@ -4,8 +4,9 @@ import com.jay.movies.data.remote.api.MovieService
 import com.jay.movies.data.remote.api.response.GetGenresResponse
 import com.jay.movies.data.remote.api.response.GetMoviesResponse
 import com.jay.movies.data.remote.api.response.GetVideosResponse
+import javax.inject.Inject
 
-class MovieRemoteDataSourceImpl(
+class MovieRemoteDataSourceImpl @Inject constructor(
     private val movieService: MovieService,
 ) : MovieRemoteDataSource {
 
