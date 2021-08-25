@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="androidx.appcompat.app.AppCompatDelegate" />
+        <import type="com.jay.movies.model.enums.Appearance" />
 
         <variable
             name="vm"
-            type="com.jay.movies.ui.setting.theme.ThemeViewModel" />
+            type="com.jay.movies.ui.setting.appearance.AppearanceViewModel" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:minWidth="@dimen/theme_min_width"
         tools:background="?colorSurface"
-        tools:context=".ui.setting.theme.ThemeDialogFragment">
+        tools:context=".ui.setting.appearance.AppearanceDialogFragment">
 
         <TextView
             android:id="@+id/tv_title"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="?colorOnSurface"
-                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)}"
+                android:onClick="@{() -> vm.selectAppearance(Appearance.SYSTEM)}"
                 android:padding="@dimen/space_small"
                 android:text="@string/theme_use_device"
                 android:textSize="14sp" />
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="?colorOnSurface"
-                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_NO)}"
+                android:onClick="@{() -> vm.selectAppearance(Appearance.LIGHT)}"
                 android:padding="@dimen/space_small"
                 android:text="@string/theme_light"
                 android:textSize="14sp" />
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="?colorOnSurface"
-                android:onClick="@{() -> vm.onClickTheme(AppCompatDelegate.MODE_NIGHT_YES)}"
+                android:onClick="@{() -> vm.selectAppearance(Appearance.NIGHT)}"
                 android:padding="@dimen/space_small"
                 android:text="@string/theme_dark"
                 android:textSize="14sp" />

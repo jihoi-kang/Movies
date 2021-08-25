@@ -33,9 +33,8 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>(
     }
 
     private fun setupObserve() {
-        viewModel.themeClickEvent.eventObserve(viewLifecycleOwner) {
-            val action = SettingFragmentDirections.actionSettingToTheme()
-            findNavController().navigate(action)
+        viewModel.showAppearanceEvent.eventObserve(viewLifecycleOwner) {
+            findNavController().navigate(SettingFragmentDirections.actionSettingToTheme())
         }
     }
 

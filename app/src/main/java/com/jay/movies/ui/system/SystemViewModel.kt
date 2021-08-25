@@ -19,21 +19,22 @@ class SystemViewModel @Inject constructor(
     private val preferences: SharedPreferences,
 ) : BaseViewModel() {
 
-    private val _currentTheme = MutableLiveData(Appearance.SYSTEM)
-    val currentTheme: LiveData<Appearance> get() = _currentTheme
+    private val _currentAppearance = MutableLiveData(Appearance.SYSTEM)
+    val currentAppearance: LiveData<Appearance> get() = _currentAppearance
 
     init {
         viewModelScope.launch {
-            val mode = preferences.getInt(MoviesApplication.CURRENT_THEME,
+            val appearanceMode = preferences.getInt(MoviesApplication.CURRENT_APPEARANCE,
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            _currentTheme.postValue(getAppearance(mode))
+            _currentAppearance.postValue(getAppearance(appearanceMode))
         }
     }
 
-    fun onChangedTheme(mode: Int) {
-        _currentTheme.value = getAppearance(mode)
-        preferences.edit { putInt(MoviesApplication.CURRENT_THEME, mode) }
-        AppCompatDelegate.setDefaultNightMode(mode)
+    fun onChangedAppearance(appearance: Appearance) {
+        _currentAppearance.value = appearance
+
+        preferences.edit { putInt(MoviesApplication.CURRENT_APPEARANCE, appearance.mode) }
+        AppCompatDelegate.setDefaultNightMode(appearance.mode)
     }
 
 }

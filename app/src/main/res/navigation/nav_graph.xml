@@ -65,8 +65,8 @@
 
     <dialog
         android:id="@+id/themeDialogFragment"
-        android:name="com.jay.movies.ui.setting.theme.ThemeDialogFragment"
+        android:name="com.jay.movies.ui.setting.appearance.AppearanceDialogFragment"
         android:label="ThemeDialogFragment"
-        tools:layout="@layout/dialog_theme" />
+        tools:layout="@layout/dialog_appearance" />
 
 </navigation>

@@ -10,11 +10,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor() : BaseViewModel() {
 
-    private val _themeClickEvent = MutableLiveData<Event<Unit>>()
-    val themeClickEvent: LiveData<Event<Unit>> get() = _themeClickEvent
+    private val _showAppearanceEvent = MutableLiveData<Event<Unit>>()
+    val showAppearanceEvent: LiveData<Event<Unit>> get() = _showAppearanceEvent
 
-    fun onClickTheme() {
-        _themeClickEvent.value = Event(Unit)
+    fun showAppearance() {
+        _showAppearanceEvent.value = Event(Unit)
     }
 
 }

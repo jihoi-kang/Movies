@@ -20,12 +20,13 @@ class MoviesApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        val theme = preference.getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        val theme =
+            preference.getInt(CURRENT_APPEARANCE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         AppCompatDelegate.setDefaultNightMode(theme)
     }
 
     companion object {
-        const val CURRENT_THEME = "current_theme"
+        const val CURRENT_APPEARANCE = "current_appearance"
     }
 
 }
