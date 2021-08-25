@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
+import com.jay.movies.data.remote.api.response.GetMoviesResponse
 import com.jay.movies.data.repository.MovieRepository
 import com.jay.movies.model.UiGenreModel
 import com.jay.movies.model.UiMovieModel
@@ -14,7 +15,9 @@ import com.jay.movies.model.enums.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
+import kotlin.coroutines.resume
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
@@ -39,20 +42,13 @@ class MovieViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val deferred = async {
-                genreItems = movieRepository.getGenres().map {
-                    it.asUiModel()
-                }
-            }
+            val genresDeferred = async { movieRepository.getGenres().map { it.asUiModel() } }
+            val moviesDeferred = async { suspendGetMovies() }
 
-            deferred.await()
-            getMovies()
-        }
-    }
+            genreItems = genresDeferred.await()
+            val movies = moviesDeferred.await()
 
-    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
-        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-            getMovies()
+            _movieItems.value = movies.map { it.asUiModel(genreItems) }
         }
     }
 
@@ -62,17 +58,12 @@ class MovieViewModel @Inject constructor(
         getMovies()
     }
 
-    private fun getMovies() {
+    fun getMovies() {
         if (isRequestInProgress) return
 
         viewModelScope.launch {
             isRequestInProgress = true
-            _movieItems.postValue(
-                movieRepository.getMovies(
-                    currentFilter.sortBy,
-                    lastRequestedPage++
-                ).map { it.asUiModel(genreItems) }
-            )
+            _movieItems.value = suspendGetMovies().map { it.asUiModel(genreItems) }
             isRequestInProgress = false
         }
     }
@@ -90,9 +81,17 @@ class MovieViewModel @Inject constructor(
         refresh()
     }
 
+    private suspend fun suspendGetMovies() =
+        suspendCancellableCoroutine<List<GetMoviesResponse.Movie>> { continuation ->
+            viewModelScope.launch {
+                continuation.resume(
+                    movieRepository.getMovies(currentFilter.sortBy, lastRequestedPage++)
+                )
+            }
+        }
+
     companion object {
         private const val STARTING_PAGE_INDEX = 1
-        private const val VISIBLE_THRESHOLD = 3
     }
 
 }

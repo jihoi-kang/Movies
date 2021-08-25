@@ -36,9 +36,12 @@ class MovieFragment : BaseFragment<MovieViewModel, FragmentMovieBinding>(
                 binding.rvMovie.layoutManager?.let {
                     val totalItemCount = it.itemCount
                     val visibleItemCount = it.childCount
-                    val lastVisibleItem = (it as LinearLayoutManager).findLastVisibleItemPosition()
+                    val lastVisibleItemPosition =
+                        (it as LinearLayoutManager).findLastVisibleItemPosition()
 
-                    viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+                    if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
+                        viewModel.getMovies()
+                    }
                 }
             }
         })
@@ -56,6 +59,10 @@ class MovieFragment : BaseFragment<MovieViewModel, FragmentMovieBinding>(
         sharedViewModel.currentFilter.eventObserve(viewLifecycleOwner) {
             viewModel.updateFilter(it)
         }
+    }
+
+    companion object {
+        private const val VISIBLE_THRESHOLD = 3
     }
 
 }
