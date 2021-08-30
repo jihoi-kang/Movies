@@ -9,13 +9,7 @@ Display the movie list.
 <img src="/preview/image_04.png" width="24%"/>
 </p>
 
-## How to set tmdb api key
-Get your [API key](https://www.themoviedb.org) and add in your `local.properties` file.
-```xml
-tmdb_api_key=YOUR_API_KEY
-```
-
-## Tech stack used
+## Tech stack
 - [Kotlin](https://kotlinlang.org/) language
 - JetPack
   - [AAC ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
@@ -29,3 +23,4 @@ tmdb_api_key=YOUR_API_KEY
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [Retrofit](https://github.com/square/retrofit)
 - [Glide](https://github.com/bumptech/glide)
+- [Timber](https://github.com/JakeWharton/timber)
