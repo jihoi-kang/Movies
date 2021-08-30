@@ -1,20 +1,17 @@
 package com.jay.movies.ui.setting.appearance
 
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.jay.movies.MoviesApplication
+import androidx.lifecycle.SavedStateHandle
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
 import com.jay.movies.model.enums.Appearance
-import com.jay.movies.model.enums.getAppearance
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AppearanceViewModel @Inject constructor(
-    preferences: SharedPreferences,
+    state: SavedStateHandle,
 ) : BaseViewModel() {
 
     private val _closeEvent = MutableLiveData<Event<Appearance>>()
@@ -24,11 +21,7 @@ class AppearanceViewModel @Inject constructor(
     val appearance: LiveData<Appearance> get() = _appearance
 
     init {
-        val appearanceMode = preferences.getInt(
-            MoviesApplication.CURRENT_APPEARANCE,
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        )
-        _appearance.value = getAppearance(appearanceMode)
+        _appearance.value = state.get<Appearance>("appearance")
     }
 
     fun selectAppearance(appearance: Appearance) {

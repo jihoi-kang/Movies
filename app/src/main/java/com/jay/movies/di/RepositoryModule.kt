@@ -1,5 +1,7 @@
 package com.jay.movies.di
 
+import com.jay.movies.data.local.SettingLocalDataSource
+import com.jay.movies.data.local.SettingLocalDataSourceImpl
 import com.jay.movies.data.remote.MovieRemoteDataSource
 import com.jay.movies.data.remote.MovieRemoteDataSourceImpl
 import com.jay.movies.data.repository.MovieRepository
@@ -21,5 +23,9 @@ abstract class RepositoryModule {
     @Binds
     @Reusable
     abstract fun provideMovieRemoteDataSource(movieRemoteDataSourceImpl: MovieRemoteDataSourceImpl): MovieRemoteDataSource
+
+    @Binds
+    @Reusable
+    abstract fun provideSettingLocalDataSource(settingLocalDataSourceImpl: SettingLocalDataSourceImpl): SettingLocalDataSource
 
 }

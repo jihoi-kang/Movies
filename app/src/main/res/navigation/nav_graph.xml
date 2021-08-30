@@ -13,7 +13,12 @@
 
         <action
             android:id="@+id/actionSettingToTheme"
-            app:destination="@id/themeDialogFragment" />
+            app:destination="@id/appearanceDialogFragment">
+            <argument
+                android:name="appearance"
+                app:argType="com.jay.movies.model.enums.Appearance"
+                app:nullable="false" />
+        </action>
 
     </fragment>
 
@@ -64,9 +69,9 @@
     </fragment>
 
     <dialog
-        android:id="@+id/themeDialogFragment"
+        android:id="@+id/appearanceDialogFragment"
         android:name="com.jay.movies.ui.setting.appearance.AppearanceDialogFragment"
-        android:label="ThemeDialogFragment"
+        android:label="AppearanceDialogFragment"
         tools:layout="@layout/dialog_appearance" />
 
 </navigation>

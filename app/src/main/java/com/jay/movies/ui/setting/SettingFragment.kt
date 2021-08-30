@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.jay.movies.BR
 import com.jay.movies.R
 import com.jay.movies.base.BaseFragment
 import com.jay.movies.common.eventObserve
 import com.jay.movies.databinding.FragmentSettingBinding
+import com.jay.movies.model.enums.Appearance
 import com.jay.movies.ui.system.SystemViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,13 +29,16 @@ class SettingFragment : BaseFragment<SettingViewModel, FragmentSettingBinding>(
     }
 
     private fun setupUi() {
-        binding.setVariable(BR.systemVm, systemViewModel)
+        viewModel.setAppearance(systemViewModel.currentAppearance.value ?: Appearance.SYSTEM)
     }
 
     private fun setupObserve() {
         viewModel.showAppearanceEvent.eventObserve(viewLifecycleOwner) {
-            findNavController().navigate(SettingFragmentDirections.actionSettingToTheme())
+            findNavController().navigate(SettingFragmentDirections.actionSettingToTheme(it))
         }
+        systemViewModel.currentAppearance.observe(viewLifecycleOwner, {
+            viewModel.setAppearance(it)
+        })
     }
 
 }
