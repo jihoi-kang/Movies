@@ -98,8 +98,15 @@ dependencies {
 
     // test
     testImplementation Dependencies.junit
-    androidTestImplementation Dependencies.espresso
     androidTestImplementation Dependencies.xTest
+    androidTestImplementation Dependencies.androidxTestRunner
+    androidTestImplementation Dependencies.androidxTestRules
+    androidTestImplementation Dependencies.espresso
+    testImplementation Dependencies.truthExt
+    testImplementation Dependencies.truth
+    testImplementation Dependencies.mockK
+    testImplementation Dependencies.coreTesting
+    testImplementation Dependencies.robolectric
 }
 
 ktlint {

@@ -35,8 +35,14 @@ object Versions {
     const val timber = "4.7.1"
 
     const val junit = "4.13.2"
-    const val espresso = "3.4.0"
     const val xTest = "1.1.3"
+    const val androidxTestRunnerVersion = "1.4.0"
+    const val espresso = "3.4.0"
+    const val truthVersion = "1.1.3"
+    const val truthExtVersion = "1.4.0"
+    const val mockKVersion = "1.12.0"
+    const val coreTestingVersion = "2.1.0"
+    const val robolectricVersion = "4.6.1"
 
     const val ktlint = "0.41.0"
 }
@@ -83,6 +89,13 @@ object Dependencies {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     const val junit = "junit:junit:${Versions.junit}"
-    const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val xTest = "androidx.test.ext:junit:${Versions.xTest}"
+    const val androidxTestRunner = "androidx.test:runner:${Versions.androidxTestRunnerVersion}"
+    const val androidxTestRules = "androidx.test:rules:${Versions.androidxTestRunnerVersion}"
+    const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    const val truth = "com.google.truth:truth:${Versions.truthVersion}"
+    const val truthExt = "androidx.test.ext:truth:${Versions.truthExtVersion}"
+    const val mockK = "io.mockk:mockk:${Versions.mockKVersion}"
+    const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTestingVersion}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectricVersion}"
 }
