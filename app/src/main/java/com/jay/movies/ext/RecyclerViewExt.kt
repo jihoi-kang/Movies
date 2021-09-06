@@ -29,5 +29,5 @@ fun RecyclerView.bindSetAdapter(
             this.adapter = it
         }
 
-    baseListAdapter.submitList(items)
+    baseListAdapter.submitList(items?.toList())
 }

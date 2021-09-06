@@ -6,18 +6,14 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.jay.movies.base.BaseViewModel
 import com.jay.movies.common.Event
-import com.jay.movies.data.remote.api.response.GetMoviesResponse
 import com.jay.movies.data.repository.MovieRepository
 import com.jay.movies.model.UiGenreModel
 import com.jay.movies.model.UiMovieModel
 import com.jay.movies.model.asUiModel
 import com.jay.movies.model.enums.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
-import kotlin.coroutines.resume
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
@@ -25,8 +21,8 @@ class MovieViewModel @Inject constructor(
 ) : BaseViewModel() {
     val isRefreshing: LiveData<Boolean> get() = movieItems.map { false }
 
-    private val _movieItems = MutableLiveData<List<UiMovieModel>>(emptyList())
-    val movieItems: LiveData<List<UiMovieModel>> get() = _movieItems
+    private val _movieItems = MutableLiveData<MutableList<UiMovieModel>>(mutableListOf())
+    val movieItems: LiveData<MutableList<UiMovieModel>> get() = _movieItems
 
     private lateinit var genreItems: List<UiGenreModel>
 
@@ -42,18 +38,13 @@ class MovieViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val genresDeferred = async { movieRepository.getGenres().map { it.asUiModel() } }
-            val moviesDeferred = async { suspendGetMovies() }
-
-            genreItems = genresDeferred.await()
-            val movies = moviesDeferred.await()
-
-            _movieItems.value = movies.map { it.asUiModel(genreItems) }
+            genreItems = movieRepository.getGenres().map { it.asUiModel() }
+            getMovies()
         }
     }
 
     fun refresh() {
-        movieRepository.clearCachedMovies()
+        _movieItems.value = mutableListOf()
         lastRequestedPage = STARTING_PAGE_INDEX
         getMovies()
     }
@@ -63,7 +54,18 @@ class MovieViewModel @Inject constructor(
 
         viewModelScope.launch {
             isRequestInProgress = true
-            _movieItems.value = suspendGetMovies().map { it.asUiModel(genreItems) }
+            val movieItems =
+                movieRepository.getMovies(currentFilter.sortBy, lastRequestedPage).map {
+                    it.asUiModel(genreItems)
+                }
+            val newList = if (lastRequestedPage == 1) {
+                movieItems.toMutableList()
+            } else {
+                _movieItems.value?.apply { addAll(movieItems) } ?: mutableListOf()
+            }
+            _movieItems.value = newList
+
+            lastRequestedPage++
             isRequestInProgress = false
         }
     }
@@ -80,15 +82,6 @@ class MovieViewModel @Inject constructor(
         currentFilter = filter
         refresh()
     }
-
-    private suspend fun suspendGetMovies() =
-        suspendCancellableCoroutine<List<GetMoviesResponse.Movie>> { continuation ->
-            viewModelScope.launch {
-                continuation.resume(
-                    movieRepository.getMovies(currentFilter.sortBy, lastRequestedPage++)
-                )
-            }
-        }
 
     companion object {
         private const val STARTING_PAGE_INDEX = 1

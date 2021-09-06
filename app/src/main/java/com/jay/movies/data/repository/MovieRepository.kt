@@ -8,8 +8,6 @@ interface MovieRepository {
 
     suspend fun getMovies(sortBy: String, page: Int): List<GetMoviesResponse.Movie>
 
-    fun clearCachedMovies()
-
     suspend fun getTrailers(movieId: Int): List<GetVideosResponse.Video>
 
     suspend fun getGenres(): List<GetGenresResponse.Genre>
